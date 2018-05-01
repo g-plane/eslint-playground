@@ -5,9 +5,7 @@ import { lint, loadParser } from './linter'
 export class Store {
   @observable code = 'var a = 0'
   @observable parser = 'espree'
-  @observable rules: NonNullable<eslint.Linter.Config['rules']> = {
-    'no-var': 1
-  }
+  @observable rules: NonNullable<eslint.Linter.Config['rules']> = {}
   @observable lintingResult: eslint.Linter.LintMessage[] = []
 
   @computed get linterReports () {
