@@ -43,6 +43,7 @@
     "css-loader": "^0.28.11",
     "eslint-config-gplane": "^1.6.0",
     "eslint-plugin-react": "^7.7.0",
+    "gh-pages": "^1.1.0",
     "html-webpack-plugin": "^3.2.0",
     "monaco-editor-webpack-plugin": "^1.1.0",
     "string-replace-loader": "^2.1.1",
