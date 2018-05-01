@@ -33,6 +33,17 @@ module.exports = {
           flags: 'g'
         }
       },
+      {
+        test: new RegExp(
+          `eslint\\${path.sep}lib\\${path.sep}(?:linter|rules)\\.js$`
+        ),
+        loader: 'string-replace-loader',
+        options: {
+          search: '(?:\\|\\||(\\())\\s*require\\(.+?\\)',
+          replace: '$1',
+          flags: 'g',
+        },
+      },
     ]
   },
   plugins: [
