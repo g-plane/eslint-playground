@@ -9,7 +9,9 @@ Note: This app needs ES2015+ environment.
 ## Todo
 
 [ ] show fixed code
+
 [ ] support parser options
+
 [ ] add more ESLint plugins
 
 ## Development
