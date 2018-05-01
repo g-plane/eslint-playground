@@ -6,3 +6,9 @@ declare module 'preact-emotion' {
   export default styled
   export * from 'emotion'
 }
+
+declare module 'eslint/lib/linter' {
+  import { Linter } from 'eslint'
+  let linter: typeof Linter
+  export default linter
+}

@@ -1,4 +1,5 @@
-import { Linter } from 'eslint'
+import * as eslint from 'eslint'
+import Linter from 'eslint/lib/linter'
 import { Subject } from 'rxjs'
 import store from './store'
 
@@ -11,9 +12,9 @@ export function getRules () {
 }
 
 export function lint (
-  code,
-  parserName,
-  rules: Linter.Config['rules']
+  code: string,
+  parserName: string,
+  rules: eslint.Linter.Config['rules']
 ) {
   return linter.verify(code, { parser: parserName, rules })
 }
