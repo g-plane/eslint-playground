@@ -16,9 +16,8 @@ module.exports = merge(base, {
       parallel: true,
       uglifyOptions: {
         ecma: 6,
-        compress: {
-          inline: false
-        }
+        compress: {},
+        mangle: false
       }
     }),
     new HtmlWebpackPlugin({
