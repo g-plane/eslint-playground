@@ -3,7 +3,7 @@ import styled from 'preact-emotion'
 import { observer, Provider } from 'mobx-preact'
 import store from './store'
 import Header from './components/Header'
-import Configuration from './components/Configuration'
+import Configuration from './components/sidebar/Configuration'
 import Editor from './components/Editor'
 import Reports from './components/Reports'
 
