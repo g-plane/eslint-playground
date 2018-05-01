@@ -1,0 +1,60 @@
+{
+  "name": "eslint-playground",
+  "version": "0.0.0",
+  "description": "ESLint Playground.",
+  "repository": "https://github.com/g-plane/eslint-playground",
+  "author": "Pig Fang <g-plane@hotmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "webpack-serve --config=build/webpack.dev.js",
+    "build": "webpack -p --progress --config=build/webpack.prod.js",
+    "test": "tsc -p . --noEmit"
+  },
+  "serve": {
+    "dev": {
+      "logLevel": "error",
+      "publicPath": "/"
+    },
+    "hot": true,
+    "logLevel": "error"
+  },
+  "dependencies": {
+    "babel-eslint": "^8.2.3",
+    "emotion": "^9.1.2",
+    "eslint": "^4.19.1",
+    "mobx": "^4.2.0",
+    "mobx-preact": "^2.0.0",
+    "monaco-editor": "^0.12.0",
+    "preact": "^8.2.9",
+    "preact-emotion": "^9.1.2",
+    "prop-types": "^15.6.1",
+    "rxjs": "^6.0.0",
+    "typescript-eslint-parser": "^15.0.0",
+    "vue-eslint-parser": "^2.0.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.46",
+    "@babel/plugin-transform-react-jsx": "^7.0.0-beta.46",
+    "@babel/preset-env": "^7.0.0-beta.46",
+    "@babel/preset-react": "^7.0.0-beta.46",
+    "@types/eslint": "^4.16.1",
+    "babel-loader": "^8.0.0-beta.2",
+    "css-loader": "^0.28.11",
+    "eslint-config-gplane": "^1.6.0",
+    "eslint-plugin-react": "^7.7.0",
+    "html-webpack-plugin": "^3.2.0",
+    "monaco-editor-webpack-plugin": "^1.1.0",
+    "string-replace-loader": "^2.1.1",
+    "style-loader": "^0.21.0",
+    "ts-loader": "^4.2.0",
+    "tslint": "^5.9.1",
+    "tslint-config-gplane": "^2.3.0",
+    "typescript": "^2.8.3",
+    "uglifyjs-webpack-plugin": "^1.2.5",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15",
+    "webpack-merge": "^4.1.2",
+    "webpack-serve": "^0.3.1"
+  }
+}

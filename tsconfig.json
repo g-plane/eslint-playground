@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "jsxFactory": "h",
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "experimentalDecorators": true
+  },
+  "include": [
+    "src"
+  ]
+}

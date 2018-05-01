@@ -1,0 +1,13 @@
+{
+  "presets": [
+    ["@babel/preset-env", {
+      "targets": {
+        "browsers": [">20%", "not dead"]
+      }
+    }],
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    ["@babel/plugin-transform-react-jsx", { "pragma": "h", "useBuiltIn": true }]
+  ]
+}
