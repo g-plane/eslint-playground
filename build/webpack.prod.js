@@ -12,7 +12,15 @@ module.exports = merge(base, {
     path: path.resolve(__dirname, '..', 'dist'),
   },
   plugins: [
-    new UglifyJSPlugin(),
+    new UglifyJSPlugin({
+      parallel: true,
+      uglifyOptions: {
+        ecma: 6,
+        compress: {
+          inline: false
+        }
+      }
+    }),
     new HtmlWebpackPlugin({
       inject: 'body',
       filename: 'index.html',

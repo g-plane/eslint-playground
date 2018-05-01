@@ -7,10 +7,16 @@ module.exports = {
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        loader: 'ts-loader',
-        options: {
-          transpileOnly: true
-        }
+        use: [
+          'thread-loader',
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+              happyPackMode: true
+            }
+          }
+        ]
       },
       {
         test: /\.js$/,
