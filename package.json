@@ -23,6 +23,8 @@
     "babel-eslint": "^8.2.3",
     "emotion": "^9.1.2",
     "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-config-xo": "^0.22.0",
     "mobx": "^4.2.0",
     "mobx-preact": "^2.0.0",
     "monaco-editor": "^0.12.0",

@@ -109,7 +109,7 @@ export default class extends Component<Props, State> {
                   type="radio"
                   name={rule}
                   value="1"
-                  checked={rules[rule] === 1}
+                  checked={rules[rule] === 1 || rules[rule] === 'warning'}
                   onChange={this.changeSeverity.get(rule)}
                 />
                 Warning
@@ -119,7 +119,7 @@ export default class extends Component<Props, State> {
                   type="radio"
                   name={rule}
                   value="2"
-                  checked={rules[rule] === 2}
+                  checked={rules[rule] === 2 || rules[rule] === 'error'}
                   onChange={this.changeSeverity.get(rule)}
                 />
                 Error

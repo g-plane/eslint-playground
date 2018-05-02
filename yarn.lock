@@ -2802,6 +2802,14 @@ eslint-config-gplane@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/eslint-config-gplane/-/eslint-config-gplane-1.6.0.tgz#ec55d71adebcb073b6ca264b6fcdf200050d8a71"
 
+eslint-config-standard@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-standard/-/eslint-config-standard-11.0.0.tgz#87ee0d3c9d95382dc761958cbb23da9eea31e0ba"
+
+eslint-config-xo@^0.22.0:
+  version "0.22.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-xo/-/eslint-config-xo-0.22.0.tgz#d55bff484e751dfe6c0750cd3617bc8c53994059"
+
 eslint-plugin-react@^7.7.0:
   version "7.7.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.7.0.tgz#f606c719dbd8a1a2b3d25c16299813878cca0160"

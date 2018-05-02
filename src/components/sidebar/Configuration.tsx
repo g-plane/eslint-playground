@@ -5,6 +5,7 @@ import { Linter } from 'eslint'
 import { Store } from '../../store'
 import { lint, loadingProcess } from '../../linter'
 import ParserSelect from './ParserSelect'
+import ShareableConfig from './ShareableConfig'
 import Rules from './Rules'
 
 const Sidebar = styled('div')`
@@ -62,6 +63,9 @@ export default class extends Component<{ store: Store }, {}> {
         <ParserSelect
           currentParser={store.parser}
           onChange={this.onParserChange}
+        />
+        <ShareableConfig
+          applyRules={store.replaceRules}
         />
         <Rules
           rules={store.rules}

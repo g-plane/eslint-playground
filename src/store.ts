@@ -1,4 +1,11 @@
-import { action, observable, computed, reaction, set, autorun } from 'mobx'
+import {
+  action,
+  observable,
+  computed,
+  reaction,
+  set,
+  autorun,
+} from 'mobx'
 import * as eslint from 'eslint'
 import { lint, loadParser } from './linter'
 
@@ -48,6 +55,11 @@ export class Store {
     set(this.rules, rule, options)
   }
 
+  @action.bound
+  replaceRules (rules: eslint.Linter.Config['rules'] = {}) {
+    this.rules = rules
+  }
+
   @action
   updateLintingResult (result: eslint.Linter.LintMessage[]) {
     this.lintingResult = result
@@ -67,6 +79,11 @@ reaction(
 reaction(
   () => store.code,
   code => store.updateLintingResult(lint(code, store.parser, store.rules))
+)
+
+reaction(
+  () => store.rules,
+  rules => store.updateLintingResult(lint(store.code, store.parser, rules))
 )
 
 export default store
