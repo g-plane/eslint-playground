@@ -1,5 +1,5 @@
 import { h, Component } from 'preact'
-import styled from 'preact-emotion'
+import styled, { css } from 'preact-emotion'
 import { observer, inject } from 'mobx-preact'
 import { Store } from '../store'
 import { Subject } from 'rxjs'
@@ -8,6 +8,10 @@ import IconError from './icons/Error'
 import IconWarning from './icons/Warning'
 
 export const positioning: Subject<[number, number]> = new Subject()
+
+const tinySpacing = css`
+  padding-right: 4px;
+`
 
 const Container = styled('div')`
   max-height: calc(100vh - 70vh - 34px);
@@ -52,12 +56,15 @@ export default class extends Component<{ store: Store }> {
             severity={report.severity}
             onClick={() => positioning.next([report.line, report.column])}
           >
-            {report.severity === 2 ? <IconError /> : <IconWarning />}
-            &nbsp;
-            {report.message}
-            &nbsp;
-            ({report.ruleId})
-            &nbsp;
+            <span class={tinySpacing}>
+              {report.severity === 2 ? <IconError /> : <IconWarning />}
+            </span>
+            <span class={tinySpacing}>{report.message}</span>
+            {
+              report.ruleId
+                ? <span class={tinySpacing}>({report.ruleId})</span>
+                : null
+            }
             ({report.line}, {report.column})
           </ListItem>
         ))}
