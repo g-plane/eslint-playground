@@ -5,6 +5,7 @@ import {
   reaction,
   set,
   autorun,
+  ObservableMap,
 } from 'mobx'
 import { Linter } from 'eslint'
 import { lint, loadParser } from './linter'
@@ -20,6 +21,10 @@ export class Store {
     }
   }
   @observable rules: NonNullable<Linter.Config['rules']> = {}
+  @observable envsList = new Map([
+    ['browser', true],
+    ['es6', true]
+  ]) as ObservableMap<string, boolean>
   @observable lintingResult: Linter.LintMessage[] = []
 
   @computed get linterReports () {
@@ -31,6 +36,10 @@ export class Store {
         line: message.line,
         column: message.column
       }))
+  }
+
+  @computed get envs () {
+    return this.envsList.toJSON()
   }
 
   @action
@@ -72,6 +81,11 @@ export class Store {
     this.rules = rules
   }
 
+  @action.bound
+  toggleEnv (name: string) {
+    this.envsList.set(name, !this.envsList.get(name))
+  }
+
   @action
   updateLintingResult (result: Linter.LintMessage[]) {
     this.lintingResult = result
@@ -94,7 +108,8 @@ reaction(
     code,
     parserName: store.parser,
     parserOptions: store.parserOptions,
-    rules: store.rules
+    rules: store.rules,
+    env: store.envs
   }))
 )
 
@@ -104,7 +119,8 @@ reaction(
     code: store.code,
     parserName: store.parser,
     parserOptions: store.parserOptions,
-    rules
+    rules,
+    env: store.envs
   }))
 )
 
@@ -114,7 +130,19 @@ reaction(
     code: store.code,
     parserName: store.parser,
     parserOptions,
-    rules: store.rules
+    rules: store.rules,
+    env: store.envs
+  }))
+)
+
+reaction(
+  () => store.envs,
+  envs => store.updateLintingResult(lint({
+    code: store.code,
+    parserName: store.parser,
+    parserOptions: store.parserOptions,
+    rules: store.rules,
+    env: envs
   }))
 )
 

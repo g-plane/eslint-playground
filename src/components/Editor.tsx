@@ -80,7 +80,8 @@ export default class extends Component<{ store: Store }, {}> {
       code: this.props.store.code,
       parserName: this.props.store.parser,
       parserOptions: this.props.store.parserOptions,
-      rules: this.props.store.rules
+      rules: this.props.store.rules,
+      env: this.props.store.envs
     }))
 
     positioning.subscribe(([line, column]) => {

@@ -6,6 +6,7 @@ import { Store } from '../../store'
 import { lint, loadingProcess } from '../../linter'
 import ParserSelect from './ParserSelect'
 import ShareableConfig from './ShareableConfig'
+import Env from './Env'
 import Rules from './Rules'
 
 const Sidebar = styled('div')`
@@ -47,13 +48,15 @@ export default class extends Component<{ store: Store }, {}> {
       code,
       parser,
       parserOptions,
-      rules
+      rules,
+      envs
     } = this.props.store
     this.props.store.updateLintingResult(lint({
       code,
       parserName: parser,
       parserOptions,
-      rules
+      rules,
+      env: envs
     }))
   }
 
@@ -77,6 +80,7 @@ export default class extends Component<{ store: Store }, {}> {
         <ShareableConfig
           applyRules={store.replaceRules}
         />
+        <Env envs={store.envs} toggleEnv={store.toggleEnv} />
         <Rules
           rules={store.rules}
           onSeverityChange={this.updateRuleSeverity}

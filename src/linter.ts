@@ -16,16 +16,19 @@ export function lint ({
   parserName,
   rules,
   parserOptions,
+  env
 }: {
   code: string,
   parserName: string,
   rules: eslint.Linter.Config['rules'],
   parserOptions: eslint.Linter.ParserOptions,
+  env: { [name: string]: boolean }
 }) {
   return linter.verify(code, {
     parser: parserName,
     parserOptions,
-    rules
+    rules,
+    env
   })
 }
 
