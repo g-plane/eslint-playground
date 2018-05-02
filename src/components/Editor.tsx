@@ -2,6 +2,7 @@ import { h, Component } from 'preact'
 import styled from 'preact-emotion'
 import { reaction } from 'mobx'
 import { observer, inject } from 'mobx-preact'
+import { Store } from '../store'
 import { lint } from '../linter'
 import * as monaco from 'monaco-editor'
 import { positioning } from './Reports'
@@ -39,6 +40,13 @@ export default class extends Component<{ store: Store }, {}> {
       }
     )
 
+    this
+      .monaco
+      .languages
+      .typescript
+      .javascriptDefaults
+      .setDiagnosticsOptions({ noSyntaxValidation: true })
+
     const model = this.editor.getModel() as monaco.editor.ITextModel
     model.onDidChangeContent(
       () => this.props.store.updateCode(model.getValue())
@@ -73,6 +81,27 @@ export default class extends Component<{ store: Store }, {}> {
             : `[eslint] ${report.message}`
         }))
       )
+    )
+    reaction(
+      () => this.props.store.parser,
+      parser => {
+        if (parser === 'typescript-eslint-parser') {
+          this.monaco.editor.setModelLanguage(
+            this.editor.getModel() as monaco.editor.ITextModel,
+            'typescript'
+          )
+        } else if (parser === 'vue-eslint-parser') {
+          this.monaco.editor.setModelLanguage(
+            this.editor.getModel() as monaco.editor.ITextModel,
+            'html'
+          )
+        } else {
+          this.monaco.editor.setModelLanguage(
+            this.editor.getModel() as monaco.editor.ITextModel,
+            'javascript'
+          )
+        }
+      }
     )
 
     this.props.store.updateLintingResult(lint({
