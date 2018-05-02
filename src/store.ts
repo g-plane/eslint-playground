@@ -6,14 +6,14 @@ import {
   set,
   autorun,
 } from 'mobx'
-import * as eslint from 'eslint'
+import { Linter } from 'eslint'
 import { lint, loadParser } from './linter'
 
 export class Store {
   @observable code = 'var a = 0'
   @observable parser = 'espree'
-  @observable rules: NonNullable<eslint.Linter.Config['rules']> = {}
-  @observable lintingResult: eslint.Linter.LintMessage[] = []
+  @observable rules: NonNullable<Linter.Config['rules']> = {}
+  @observable lintingResult: Linter.LintMessage[] = []
 
   @computed get linterReports () {
     return this.lintingResult
@@ -37,7 +37,7 @@ export class Store {
   }
 
   @action
-  updateRuleSeverity (ruleId: string, severity: eslint.Linter.RuleLevel) {
+  updateRuleSeverity (ruleId: string, severity: Linter.RuleLevel) {
     const rule = this.rules[ruleId]
     if (Array.isArray(rule)) {
       rule[0] = severity
@@ -48,7 +48,7 @@ export class Store {
   }
 
   @action
-  updateRuleOption (rule: string, options: eslint.Linter.RuleLevelAndOptions) {
+  updateRuleOption (rule: string, options: Linter.RuleLevelAndOptions) {
     const old = this.rules[rule]
     const severity = Array.isArray(old) ? old[0] : old
     options.unshift(severity)
@@ -56,12 +56,12 @@ export class Store {
   }
 
   @action.bound
-  replaceRules (rules: eslint.Linter.Config['rules'] = {}) {
+  replaceRules (rules: Linter.Config['rules'] = {}) {
     this.rules = rules
   }
 
   @action
-  updateLintingResult (result: eslint.Linter.LintMessage[]) {
+  updateLintingResult (result: Linter.LintMessage[]) {
     this.lintingResult = result
   }
 }
