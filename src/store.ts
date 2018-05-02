@@ -12,6 +12,13 @@ import { lint, loadParser } from './linter'
 export class Store {
   @observable code = 'var a = 0'
   @observable parser = 'espree'
+  @observable parserOptions: Linter.ParserOptions = {
+    ecmaVersion: 2018,
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true
+    }
+  }
   @observable rules: NonNullable<Linter.Config['rules']> = {}
   @observable lintingResult: Linter.LintMessage[] = []
 
@@ -34,6 +41,11 @@ export class Store {
   @action
   updateCode (code: string) {
     this.code = code
+  }
+
+  @action.bound
+  updateParserOptions (options: Linter.ParserOptions) {
+    this.parserOptions = { ...this.parserOptions, ...options }
   }
 
   @action
@@ -83,7 +95,22 @@ reaction(
 
 reaction(
   () => store.rules,
-  rules => store.updateLintingResult(lint(store.code, store.parser, rules))
+  rules => store.updateLintingResult(lint({
+    code: store.code,
+    parserName: store.parser,
+    parserOptions: store.parserOptions,
+    rules
+  }))
+)
+
+reaction(
+  () => store.parserOptions,
+  parserOptions => store.updateLintingResult(lint({
+    code: store.code,
+    parserName: store.parser,
+    parserOptions,
+    rules: store.rules
+  }))
 )
 
 export default store

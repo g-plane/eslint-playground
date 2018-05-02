@@ -11,12 +11,22 @@ export function getRules () {
   return linter.getRules()
 }
 
-export function lint (
+export function lint ({
+  code,
+  parserName,
+  rules,
+  parserOptions,
+}: {
   code: string,
   parserName: string,
-  rules: eslint.Linter.Config['rules']
-) {
-  return linter.verify(code, { parser: parserName, rules })
+  rules: eslint.Linter.Config['rules'],
+  parserOptions: eslint.Linter.ParserOptions,
+}) {
+  return linter.verify(code, {
+    parser: parserName,
+    parserOptions,
+    rules
+  })
 }
 
 export async function loadParser (parserName: string) {

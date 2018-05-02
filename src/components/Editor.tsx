@@ -76,11 +76,12 @@ export default class extends Component<{ store: Store }, {}> {
       )
     )
 
-    this.props.store.updateLintingResult(lint(
-      this.props.store.code,
-      this.props.store.parser,
-      this.props.store.rules
-    ))
+    this.props.store.updateLintingResult(lint({
+      code: this.props.store.code,
+      parserName: this.props.store.parser,
+      parserOptions: this.props.store.parserOptions,
+      rules: this.props.store.rules
+    }))
 
     positioning.subscribe(([line, column]) => {
       this.editor.setPosition({ lineNumber: line, column })

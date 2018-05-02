@@ -43,8 +43,18 @@ export default class extends Component<{ store: Store }, {}> {
   }
 
   lint () {
-    const { code, parser, rules } = this.props.store
-    this.props.store.updateLintingResult(lint(code, parser, rules))
+    const {
+      code,
+      parser,
+      parserOptions,
+      rules
+    } = this.props.store
+    this.props.store.updateLintingResult(lint({
+      code,
+      parserName: parser,
+      parserOptions,
+      rules
+    }))
   }
 
   updateRuleSeverity (ruleId: string, severity: Linter.Severity) {
