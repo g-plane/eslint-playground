@@ -90,7 +90,12 @@ reaction(
 
 reaction(
   () => store.code,
-  code => store.updateLintingResult(lint(code, store.parser, store.rules))
+  code => store.updateLintingResult(lint({
+    code,
+    parserName: store.parser,
+    parserOptions: store.parserOptions,
+    rules: store.rules
+  }))
 )
 
 reaction(
