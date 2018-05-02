@@ -16,6 +16,9 @@ const Container = styled('div')`
 const List = styled('ul')`
   margin: 0;
   padding-left: 0;
+  max-height: calc(100vh - 70vh - 34px);
+  overflow-x: hidden;
+  overflow-y: scroll;
 `
 
 // @ts-ignore
