@@ -6,14 +6,6 @@ Try it online: [https://g-plane.github.io/eslint-playground/](https://g-plane.gi
 
 Note: This app needs ES2015+ environment.
 
-## Todo
-
-[ ] show fixed code
-
-[ ] support parser options
-
-[ ] add more ESLint plugins
-
 ## Development
 
 Make sure you have installed Node.js 8+ and Yarn.
