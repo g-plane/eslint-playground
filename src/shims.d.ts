@@ -12,3 +12,8 @@ declare module 'eslint/lib/linter' {
   let linter: typeof Linter
   export default linter
 }
+
+declare module '*/package.json' {
+  let pkg: { name: string, version: string }
+  export default pkg
+}

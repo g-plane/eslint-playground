@@ -55,7 +55,7 @@ interface State {
 @observer
 export default class extends Component<Props, State> {
   state = {
-    opened: true
+    opened: false
   }
 
   changeSeverity: Map<string, (event: Event) => void> = Array

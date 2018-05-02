@@ -8,6 +8,7 @@ import ParserSelect from './ParserSelect'
 import ShareableConfig from './ShareableConfig'
 import Env from './Env'
 import Rules from './Rules'
+import Version from './Version'
 
 const Sidebar = styled('div')`
   width: calc(25% - 1px);
@@ -81,6 +82,7 @@ export default class extends Component<{ store: Store }, {}> {
           onSeverityChange={this.updateRuleSeverity}
           onOptionsChange={this.updateRuleOption}
         />
+        <Version />
       </Sidebar>
     )
   }
