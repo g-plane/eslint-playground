@@ -1,7 +1,5 @@
 import { h, Component } from 'preact'
-import { css } from 'preact-emotion'
 import { observer } from 'mobx-preact'
-import { Linter } from 'eslint'
 import { ConfigurationItem } from './ConfigurationItem'
 
 const availableEnvs = [

@@ -1,5 +1,5 @@
 import { h } from 'preact'
-import styled, { css } from 'preact-emotion'
+import styled from 'preact-emotion'
 
 const Header = styled('div')`
   display: flex;

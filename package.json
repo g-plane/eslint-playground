@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "webpack-serve --config=build/webpack.dev.js",
     "build": "webpack -p --progress --config=build/webpack.prod.js",
-    "test": "tsc -p . --noEmit"
+    "test": "tsc -p . --noEmit",
+    "lint": "tslint --formatters-dir ./node_modules/tslint-formatter-beauty -t beauty -p ."
   },
   "serve": {
     "dev": {
@@ -54,6 +55,7 @@
     "ts-loader": "^4.2.0",
     "tslint": "^5.9.1",
     "tslint-config-gplane": "^2.3.0",
+    "tslint-formatter-beauty": "^1.2.0",
     "typescript": "^2.8.3",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^4.6.0",

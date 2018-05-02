@@ -19,11 +19,6 @@ const Sidebar = styled('div')`
   overflow-y: scroll;
 `
 
-interface Props {
-  parser: string,
-  changeParser (parser: string): void
-}
-
 @inject('store')
 @observer
 export default class extends Component<{ store: Store }, {}> {

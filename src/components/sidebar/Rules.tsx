@@ -1,10 +1,9 @@
 import { h, Component } from 'preact'
-import styled, { css } from 'preact-emotion'
-import { observer, inject } from 'mobx-preact'
-import { Store } from '../../store'
+import { css } from 'preact-emotion'
+import { observer } from 'mobx-preact'
 import { ConfigurationItem } from './ConfigurationItem'
 import * as eslint from 'eslint'
-import { getRules, lint } from '../../linter'
+import { getRules } from '../../linter'
 
 const availableRules = getRules()
 

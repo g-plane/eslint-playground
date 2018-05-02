@@ -1,5 +1,4 @@
 import { h, Component } from 'preact'
-import styled from 'preact-emotion'
 import { observer } from 'mobx-preact'
 import { ConfigurationItem } from './ConfigurationItem'
 

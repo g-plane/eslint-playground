@@ -4,7 +4,6 @@ import {
   computed,
   reaction,
   set,
-  autorun,
   ObservableMap,
 } from 'mobx'
 import { Linter } from 'eslint'

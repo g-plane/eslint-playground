@@ -24,6 +24,29 @@ const listStyle = css`
   margin: 0;
 `
 
+const listItemStyle = css`
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  list-style: none;
+  border-bottom: 1px solid #E8F5E9;
+
+  &:hover {
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.065),
+      rgba(0,0,0,0.0325) 67%,
+      rgba(0,0,0,0.065)
+    );
+  }
+`
+
+class ListItem extends Component<{}, {}> {
+  render () {
+    return <li class={listItemStyle}>{this.props.children}</li>
+  }
+}
+
 interface Props {
   title: string,
   class?: string,
@@ -46,28 +69,5 @@ export class ConfigurationItem extends Component<Props, {}> {
         </ul>
       </Container>
     )
-  }
-}
-
-const listItemStyle = css`
-  display: flex;
-  align-items: center;
-  padding: 5px;
-  list-style: none;
-  border-bottom: 1px solid #E8F5E9;
-
-  &:hover {
-    background-image: linear-gradient(
-      to bottom,
-      rgba(0,0,0,0.065),
-      rgba(0,0,0,0.0325) 67%,
-      rgba(0,0,0,0.065)
-    );
-  }
-`
-
-class ListItem extends Component<{}, {}> {
-  render () {
-    return <li class={listItemStyle}>{this.props.children}</li>
   }
 }

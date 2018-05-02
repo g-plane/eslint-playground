@@ -1,7 +1,6 @@
 import * as eslint from 'eslint'
 import Linter from 'eslint/lib/linter'
 import { Subject } from 'rxjs'
-import store from './store'
 
 let parser
 export const loadingProcess = new Subject()

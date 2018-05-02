@@ -242,7 +242,7 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
-"@babel/highlight@7.0.0-beta.46":
+"@babel/highlight@7.0.0-beta.46", "@babel/highlight@^7.0.0-beta.44":
   version "7.0.0-beta.46"
   resolved "https://registry.yarnpkg.com/@babel/highlight/-/highlight-7.0.0-beta.46.tgz#c553c51e65f572bdedd6eff66fc0bb563016645e"
   dependencies:
@@ -2066,6 +2066,12 @@ coa@~1.0.1:
   dependencies:
     q "^1.1.2"
 
+code-excerpt@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/code-excerpt/-/code-excerpt-2.1.1.tgz#5fe3057bfbb71a5f300f659ef2cc0a47651ba77c"
+  dependencies:
+    convert-to-spaces "^1.0.1"
+
 code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
@@ -2190,6 +2196,10 @@ content-type@^1.0.0:
 convert-source-map@^1.1.0, convert-source-map@^1.5.0, convert-source-map@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.5.1.tgz#b8278097b9bc229365de5c62cf5fcaed8b5599e5"
+
+convert-to-spaces@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/convert-to-spaces/-/convert-to-spaces-1.0.2.tgz#7e3e48bbe6d997b1417ddca2868204b4d3d85715"
 
 cookies@~0.7.0:
   version "0.7.1"
@@ -6715,6 +6725,16 @@ tslint-eslint-rules@^5.1.0:
     doctrine "0.7.2"
     tslib "1.9.0"
     tsutils "2.8.0"
+
+tslint-formatter-beauty@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/tslint-formatter-beauty/-/tslint-formatter-beauty-1.2.0.tgz#0d6829f9f26c045d66c122b67874932dc2a90270"
+  dependencies:
+    "@babel/highlight" "^7.0.0-beta.44"
+    ansi-styles "^3.2.1"
+    chalk "^2.3.2"
+    code-excerpt "^2.1.1"
+    log-symbols "^2.2.0"
 
 tslint@^5.9.1:
   version "5.9.1"

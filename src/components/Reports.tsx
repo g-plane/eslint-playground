@@ -3,7 +3,6 @@ import styled, { css } from 'preact-emotion'
 import { observer, inject } from 'mobx-preact'
 import { Store } from '../store'
 import { Subject } from 'rxjs'
-import * as eslint from 'eslint'
 import IconError from './icons/Error'
 import IconWarning from './icons/Warning'
 
