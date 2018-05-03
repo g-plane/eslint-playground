@@ -28,6 +28,7 @@
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-react": "^7.7.0",
     "eslint-plugin-unicorn": "^4.0.3",
+    "eslint-plugin-vue": "^4.5.0",
     "mobx": "^4.2.0",
     "mobx-preact": "^2.0.0",
     "monaco-editor": "^0.12.0",

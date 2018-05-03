@@ -33,6 +33,15 @@ const react =
     })
     .join()
 
+const vue =
+  fs.readdirSync('node_modules/eslint-plugin-vue/lib/rules')
+    .filter(isJs)
+    .map(name => {
+      const rule = path.basename(name, '.js')
+      return `'vue/${rule}': require('eslint-plugin-vue/lib/rules/${name}')`
+    })
+    .join()
+
 const unicorn =
   fs.readdirSync('node_modules/eslint-plugin-unicorn/rules')
     .filter(isJs)
@@ -56,6 +65,7 @@ const rules = [
   core,
   promise,
   react,
+  vue,
   unicorn,
   flowtype
 ]

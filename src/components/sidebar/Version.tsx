@@ -7,6 +7,7 @@ import typescriptParser from 'typescript-eslint-parser/package.json'
 import vueParser from 'vue-eslint-parser/package.json'
 import pluginPromise from 'eslint-plugin-promise/package.json'
 import pluginReact from 'eslint-plugin-react/package.json'
+import pluginVue from 'eslint-plugin-vue/package.json'
 import pluginUnicorn from 'eslint-plugin-unicorn/package.json'
 import pluginFlowtype from 'eslint-plugin-flowtype/package.json'
 
@@ -101,6 +102,16 @@ export default class extends Component<{}, State> {
               eslint-plugin-react
             </Link>
             v{pluginReact.version}
+          </div>
+          <div>
+            <Link
+              href="https://github.com/vuejs/eslint-plugin-vue"
+              target="_blank"
+              rel="noopener"
+            >
+              eslint-plugin-vue
+            </Link>
+            v{pluginVue.version}
           </div>
           <div>
             <Link
