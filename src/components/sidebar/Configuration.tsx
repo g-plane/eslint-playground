@@ -5,6 +5,7 @@ import { Linter } from 'eslint'
 import { Store } from '../../store'
 import { lint, loadingProcess } from '../../linter'
 import ParserSelect from './ParserSelect'
+import ParserOptions from './ParserOptions'
 import ShareableConfig from './ShareableConfig'
 import Env from './Env'
 import SharedSettings from './SharedSettings'
@@ -69,6 +70,10 @@ export default class extends Component<{ store: Store }, {}> {
         <ParserSelect
           currentParser={store.parser}
           onChange={this.onParserChange}
+        />
+        <ParserOptions
+          currentParser={store.parser}
+          updateParserOptions={store.updateParserOptions}
         />
         <ShareableConfig
           applyRules={store.replaceRules}

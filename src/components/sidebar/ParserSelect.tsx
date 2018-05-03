@@ -5,7 +5,8 @@ import { ConfigurationItem } from './ConfigurationItem'
 const parsers = [
   'espree',
   'babel-eslint',
-  'typescript-eslint-parser'
+  'typescript-eslint-parser',
+  'vue-eslint-parser'
 ]
 
 interface Props {

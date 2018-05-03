@@ -45,6 +45,9 @@ export async function loadParser (parserName: string) {
   case 'typescript-eslint-parser':
     parser = await import('typescript-eslint-parser')
     break
+  case 'vue-eslint-parser':
+    parser = await import('vue-eslint-parser')
+    break
   default:
     return {}
   }

@@ -56,37 +56,46 @@ export default class extends Component<{ store: Store }, {}> {
       () => this.props.store.updateCode(model.getValue())
     )
 
+    const codeActionProvider = {
+      provideCodeActions: (
+        textModel: monaco.editor.ITextModel,
+        range: monaco.Range,
+        context: monaco.languages.CodeActionContext,
+        token: monaco.CancellationToken
+      ) =>
+        context
+          .markers
+          .filter(marker => marker.source === 'eslint')
+          .filter(({ relatedInformation }) => relatedInformation)
+          .map(problem => {
+            const fix = problem.relatedInformation![0]
+            return {
+              title: `Fix this ${fix.message} problem`,
+              diagnostics: [problem],
+              edit: {
+                edits: [{
+                  resource: textModel.uri,
+                  edits: [{
+                    text: problem.code,
+                    range: fix
+                  }]
+                }]
+              }
+            } as monaco.languages.CodeAction
+          })
+    }
     this
       .monaco
       .languages
-      .registerCodeActionProvider('javascript', {
-        provideCodeActions: (
-          textModel: monaco.editor.ITextModel,
-          range: monaco.Range,
-          context: monaco.languages.CodeActionContext,
-          token: monaco.CancellationToken
-        ) =>
-          context
-            .markers
-            .filter(marker => marker.source === 'eslint')
-            .filter(({ relatedInformation }) => relatedInformation)
-            .map(problem => {
-              const fix = problem.relatedInformation![0]
-              return {
-                title: `Fix this ${fix.message} problem`,
-                diagnostics: [problem],
-                edit: {
-                  edits: [{
-                    resource: textModel.uri,
-                    edits: [{
-                      text: problem.code,
-                      range: fix
-                    }]
-                  }]
-                }
-              } as monaco.languages.CodeAction
-            })
-      })
+      .registerCodeActionProvider('javascript', codeActionProvider)
+    this
+      .monaco
+      .languages
+      .registerCodeActionProvider('typescript', codeActionProvider)
+    this
+      .monaco
+      .languages
+      .registerCodeActionProvider('html', codeActionProvider)
 
     reaction(
       () => this.props.store.lintingResult.map(result => ({

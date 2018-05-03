@@ -1,6 +1,7 @@
 const path = require('path')
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 
+/* eslint-disable operator-linebreak */
 module.exports = {
   module: {
     rules: [
@@ -48,6 +49,17 @@ module.exports = {
           search: '(?:\\|\\||(\\())\\s*require\\(.+?\\)',
           replace: '$1',
           flags: 'g',
+        },
+      },
+      {
+        test: /vue-eslint-parser/,
+        loader: 'string-replace-loader',
+        options: {
+          search: 'require(parserOptions.parser || "espree")',
+          replace: '(parserOptions.parser === "babel-eslint"' +
+            '? require("babel-eslint") : (' +
+            'parserOptions.parser === "typescript-eslint-parser" ?' +
+            'require("typescript-eslint-parser") : require("espree")))',
         },
       },
     ]
