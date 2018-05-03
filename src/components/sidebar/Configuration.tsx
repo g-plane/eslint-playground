@@ -6,6 +6,7 @@ import { Store } from '../../store'
 import { lint, loadingProcess } from '../../linter'
 import ParserSelect from './ParserSelect'
 import ParserOptions from './ParserOptions'
+import FormatOptions from './FormatOptions'
 import Env from './Env'
 import SharedSettings from './SharedSettings'
 import Rules from './Rules'
@@ -73,6 +74,11 @@ export default class extends Component<{ store: Store }, {}> {
         <ParserOptions
           currentParser={store.parser}
           updateParserOptions={store.updateParserOptions}
+        />
+        <FormatOptions
+          indent={store.indent}
+          changeIndentType={store.changeIndentType}
+          changeIndentSize={store.changeIndentSize}
         />
         <Env envs={store.envs} toggleEnv={store.toggleEnv} />
         <SharedSettings

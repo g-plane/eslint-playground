@@ -27,6 +27,10 @@ export class Store {
   @observable lintingResult: Linter.LintMessage[] = []
   @observable reactPragma = 'React'
   @observable onlyFilesWithFlowAnnotation = true
+  @observable indent: {
+    type: 'space' | 'tab',
+    size: number
+  } = { type: 'space', size: 2 }
 
   @computed get linterReports () {
     return this.lintingResult
@@ -103,6 +107,18 @@ export class Store {
   @action.bound
   toggleOnlyFilesWithFlowAnnotation () {
     this.onlyFilesWithFlowAnnotation = !this.onlyFilesWithFlowAnnotation
+  }
+
+  @action.bound
+  changeIndentType (type: 'space' | 'tab') {
+    set(this.indent, 'type', type)
+  }
+
+  @action.bound
+  changeIndentSize (size: number) {
+    if (size >= 0) {
+      set(this.indent, 'size', size)
+    }
   }
 }
 

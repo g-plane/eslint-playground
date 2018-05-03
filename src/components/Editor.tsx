@@ -55,6 +55,24 @@ export default class extends Component<{ store: Store }, {}> {
     model.onDidChangeContent(
       () => this.props.store.updateCode(model.getValue())
     )
+    reaction(
+      () => this.props.store.indent.type,
+      indent => {
+        model.updateOptions({
+          insertSpaces: indent === 'space'
+        })
+      },
+      { fireImmediately: true }
+    )
+    reaction(
+      () => this.props.store.indent.size,
+      indent => {
+        model.updateOptions({
+          tabSize: indent
+        })
+      },
+      { fireImmediately: true }
+    )
 
     const codeActionProvider = {
       provideCodeActions: (
