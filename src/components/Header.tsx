@@ -7,8 +7,8 @@ const Header = styled('div')`
   align-items: center;
   justify-content: flex-start;
   flex-shrink: 0;
-  background-color: #A5D6A7;
-  border-bottom: 1px solid #4CAF50;
+  background-color: #633adf;
+  border-bottom: 1px solid #411daf;
 `
 
 const Title = styled('span')`
@@ -19,6 +19,8 @@ const Title = styled('span')`
 
 export default ({ onClick }) => (
   <Header>
-    <Title onClick={onClick}>ESLint Playground</Title>
+    <Title onClick={onClick}>
+      <span style={{ color: '#fff' }}>ESLint Playground</span>
+    </Title>
   </Header>
 )

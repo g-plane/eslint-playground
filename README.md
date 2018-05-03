@@ -22,7 +22,7 @@ $ yarn build  # For production build
 
 ## Credits
 
-The main theme of this web application is from [mysticatea/vue-eslint-demo](https://github.com/mysticatea/vue-eslint-demo).
+The main CSS of this web application is from [mysticatea/vue-eslint-demo](https://github.com/mysticatea/vue-eslint-demo).
 
 ## License
 

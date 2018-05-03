@@ -12,8 +12,9 @@ const Header = styled('label')`
   position: sticky;
   top: 0;
   padding: 8px;
-  background-color: #E8F5E9;
-  border-bottom: 1px solid #4CAF50;
+  color: #fff;
+  background-color: #8665e6;
+  border-bottom: 1px solid #633adf;
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0 2px 2px rgba(0,0,0, 0.25);
