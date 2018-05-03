@@ -25,6 +25,8 @@ export class Store {
     ['es6', true]
   ]) as ObservableMap<string, boolean>
   @observable lintingResult: Linter.LintMessage[] = []
+  @observable reactPragma = 'React'
+  @observable onlyFilesWithFlowAnnotation = true
 
   @computed get linterReports () {
     return this.lintingResult
@@ -39,6 +41,17 @@ export class Store {
 
   @computed get envs () {
     return this.envsList.toJSON()
+  }
+
+  @computed get sharedSettings () {
+    return {
+      react: {
+        pragma: this.reactPragma
+      },
+      flowtype: {
+        onlyFilesWithFlowAnnotation: this.onlyFilesWithFlowAnnotation
+      }
+    }
   }
 
   @action
@@ -81,6 +94,16 @@ export class Store {
   updateLintingResult (result: Linter.LintMessage[]) {
     this.lintingResult = result
   }
+
+  @action.bound
+  changeReactPragma (pragma: string) {
+    this.reactPragma = pragma
+  }
+
+  @action.bound
+  toggleOnlyFilesWithFlowAnnotation () {
+    this.onlyFilesWithFlowAnnotation = !this.onlyFilesWithFlowAnnotation
+  }
 }
 
 const store = new Store()
@@ -100,7 +123,8 @@ reaction(
     parserName: store.parser,
     parserOptions: store.parserOptions,
     rules: store.rules,
-    env: store.envs
+    env: store.envs,
+    settings: store.sharedSettings
   }))
 )
 
@@ -111,7 +135,8 @@ reaction(
     parserName: store.parser,
     parserOptions: store.parserOptions,
     rules,
-    env: store.envs
+    env: store.envs,
+    settings: store.sharedSettings
   }))
 )
 
@@ -122,7 +147,8 @@ reaction(
     parserName: store.parser,
     parserOptions,
     rules: store.rules,
-    env: store.envs
+    env: store.envs,
+    settings: store.sharedSettings
   }))
 )
 
@@ -133,7 +159,32 @@ reaction(
     parserName: store.parser,
     parserOptions: store.parserOptions,
     rules: store.rules,
-    env: envs
+    env: envs,
+    settings: store.sharedSettings
+  }))
+)
+
+reaction(
+  () => store.reactPragma,
+  () => store.updateLintingResult(lint({
+    code: store.code,
+    parserName: store.parser,
+    parserOptions: store.parserOptions,
+    rules: store.rules,
+    env: store.envs,
+    settings: store.sharedSettings
+  }))
+)
+
+reaction(
+  () => store.onlyFilesWithFlowAnnotation,
+  () => store.updateLintingResult(lint({
+    code: store.code,
+    parserName: store.parser,
+    parserOptions: store.parserOptions,
+    rules: store.rules,
+    env: store.envs,
+    settings: store.sharedSettings
   }))
 )
 

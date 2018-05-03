@@ -2,7 +2,7 @@ import { h, Component } from 'preact'
 import styled from 'preact-emotion'
 import { reaction } from 'mobx'
 import { observer, inject } from 'mobx-preact'
-import { Store } from '../store'  // tslint:disable no-unused-variable
+import { Store } from '../store'  // tslint:disable-line no-unused-variable
 import { lint } from '../linter'
 import * as monaco from 'monaco-editor'
 import { positioning } from './Reports'
@@ -165,7 +165,8 @@ export default class extends Component<{ store: Store }, {}> {
       parserName: this.props.store.parser,
       parserOptions: this.props.store.parserOptions,
       rules: this.props.store.rules,
-      env: this.props.store.envs
+      env: this.props.store.envs,
+      settings: this.props.store.sharedSettings
     }))
 
     positioning.subscribe(([line, column]) => {

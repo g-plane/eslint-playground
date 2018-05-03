@@ -7,6 +7,7 @@ import { lint, loadingProcess } from '../../linter'
 import ParserSelect from './ParserSelect'
 import ShareableConfig from './ShareableConfig'
 import Env from './Env'
+import SharedSettings from './SharedSettings'
 import Rules from './Rules'
 import Version from './Version'
 
@@ -44,14 +45,16 @@ export default class extends Component<{ store: Store }, {}> {
       parser,
       parserOptions,
       rules,
-      envs
+      envs,
+      sharedSettings
     } = this.props.store
     this.props.store.updateLintingResult(lint({
       code,
       parserName: parser,
       parserOptions,
       rules,
-      env: envs
+      env: envs,
+      settings: sharedSettings
     }))
   }
 
@@ -71,6 +74,14 @@ export default class extends Component<{ store: Store }, {}> {
           applyRules={store.replaceRules}
         />
         <Env envs={store.envs} toggleEnv={store.toggleEnv} />
+        <SharedSettings
+          reactPragma={store.reactPragma}
+          onlyFilesWithFlowAnnotation={store.onlyFilesWithFlowAnnotation}
+          changeReactPragma={store.changeReactPragma}
+          toggleOnlyFilesWithFlowAnnotation={
+            store.toggleOnlyFilesWithFlowAnnotation
+          }
+        />
         <Rules
           rules={store.rules}
           onSeverityChange={this.updateRuleSeverity}
