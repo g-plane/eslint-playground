@@ -19,7 +19,13 @@ export class Store {
       jsx: true
     }
   }
-  @observable rules: NonNullable<Linter.Config['rules']> = {}
+  @observable rules: NonNullable<Linter.Config['rules']> = {
+    'no-var': 2,
+    'no-undef': 2,
+    eqeqeq: 2,
+    'no-unused-vars': 1,
+    'no-unused-expressions': 2,
+  }
   @observable envsList = new Map([
     ['browser', true],
     ['es6', true]
