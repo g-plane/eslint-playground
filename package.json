@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "dev": "webpack-serve --config=build/webpack.dev.js",
-    "build": "webpack -p --progress --config=build/webpack.prod.js",
+    "build": "webpack --progress --config=build/webpack.prod.js",
     "test": "tsc -p . --noEmit",
     "lint": "tslint --formatters-dir ./node_modules/tslint-formatter-beauty -t beauty -p ."
   },
