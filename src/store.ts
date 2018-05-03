@@ -67,14 +67,6 @@ export class Store {
     }
   }
 
-  @action
-  updateRuleOption (rule: string, options: Linter.RuleLevelAndOptions) {
-    const old = this.rules[rule]
-    const severity = Array.isArray(old) ? old[0] : old
-    options.unshift(severity)
-    set(this.rules, rule, options)
-  }
-
   @action.bound
   replaceRules (rules: Linter.Config['rules'] = {}) {
     this.rules = rules

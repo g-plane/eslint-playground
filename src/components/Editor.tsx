@@ -2,7 +2,7 @@ import { h, Component } from 'preact'
 import styled from 'preact-emotion'
 import { reaction } from 'mobx'
 import { observer, inject } from 'mobx-preact'
-import { Store } from '../store'
+import { Store } from '../store'  // tslint:disable no-unused-variable
 import { lint } from '../linter'
 import * as monaco from 'monaco-editor'
 import { positioning } from './Reports'

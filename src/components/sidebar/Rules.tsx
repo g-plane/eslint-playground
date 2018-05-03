@@ -7,33 +7,6 @@ import { getRules } from '../../linter'
 
 const availableRules = getRules()
 
-function renderRule (
-  rule: string,
-  meta: eslint.Rule.RuleMetaData,
-  onUpdate: (options: eslint.Linter.RuleLevelAndOptions) => void
-) {
-  if (Array.isArray(meta)) {
-    return meta.map(scm => {
-      if ('enum' in scm) {
-        return (
-          <div>
-            {scm.enus.map(v => (
-              <label>
-                <input name={`${rule}-enum`} value={v} type="radio" />
-                {v}
-              </label>
-            ))}
-          </div>
-        )
-      }
-    })
-  } else if (meta !== undefined) {
-    //
-  } else {
-    return null
-  }
-}
-
 const serverityStyle = css`
   padding-left: 2px;
   padding-right: 4px;
@@ -42,10 +15,6 @@ const serverityStyle = css`
 interface Props {
   rules: NonNullable<eslint.Linter.Config['rules']>
   onSeverityChange (ruleId: string, severity: eslint.Linter.Severity): void
-  onOptionsChange (
-    ruleId: string,
-    options: eslint.Linter.RuleLevelAndOptions
-  ): void
 }
 
 interface State {
@@ -71,10 +40,6 @@ export default class extends Component<Props, State> {
       acc: Map<string, (event: Event) => void>,
       [rule, fn]
     ) => acc.set(rule as string, fn as () => void), new Map())
-
-  changeRuleOptions (rule: string) {
-    return options => this.props.onOptionsChange(rule, options)
-  }
 
   constructor (props) {
     super(props)
@@ -124,7 +89,6 @@ export default class extends Component<Props, State> {
                 Error
               </label>
             </div>
-            {renderRule(rule, meta!, this.changeRuleOptions(rule))}
           </div>
         ))}
         </ConfigurationItem>

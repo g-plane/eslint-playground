@@ -28,7 +28,6 @@ export default class extends Component<{ store: Store }, {}> {
     this.onParserChange = this.onParserChange.bind(this)
     this.lint = this.lint.bind(this)
     this.updateRuleSeverity = this.updateRuleSeverity.bind(this)
-    this.updateRuleOption = this.updateRuleOption.bind(this)
   }
 
   onParserChange (
@@ -61,11 +60,6 @@ export default class extends Component<{ store: Store }, {}> {
     this.lint()
   }
 
-  updateRuleOption (ruleId: string, options: Linter.RuleLevelAndOptions) {
-    this.props.store.updateRuleOption(ruleId, options)
-    this.lint()
-  }
-
   render ({ store }: { store: Store }) {
     return (
       <Sidebar>
@@ -80,7 +74,6 @@ export default class extends Component<{ store: Store }, {}> {
         <Rules
           rules={store.rules}
           onSeverityChange={this.updateRuleSeverity}
-          onOptionsChange={this.updateRuleOption}
         />
         <Version />
       </Sidebar>

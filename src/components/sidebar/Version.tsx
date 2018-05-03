@@ -1,5 +1,4 @@
 import { h, Component } from 'preact'
-import { observer } from 'mobx-preact'
 import styled from 'preact-emotion'
 import { ConfigurationItem } from './ConfigurationItem'
 import eslint from 'eslint/package.json'
