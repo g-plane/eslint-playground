@@ -36,7 +36,11 @@ export default class extends Component<{ store: Store }, {}> {
       {
         language: 'javascript',
         fontSize: 14,
-        value: this.props.store.code
+        value: this.props.store.code,
+        smoothScrolling: true,
+        lightbulb: {
+          enabled: true
+        }
       }
     )
 
@@ -52,6 +56,38 @@ export default class extends Component<{ store: Store }, {}> {
       () => this.props.store.updateCode(model.getValue())
     )
 
+    this
+      .monaco
+      .languages
+      .registerCodeActionProvider('javascript', {
+        provideCodeActions: (
+          textModel: monaco.editor.ITextModel,
+          range: monaco.Range,
+          context: monaco.languages.CodeActionContext,
+          token: monaco.CancellationToken
+        ) =>
+          context
+            .markers
+            .filter(marker => marker.source === 'eslint')
+            .filter(({ relatedInformation }) => relatedInformation)
+            .map(problem => {
+              const fix = problem.relatedInformation![0]
+              return {
+                title: `Fix this ${fix.message} problem`,
+                diagnostics: [problem],
+                edit: {
+                  edits: [{
+                    resource: textModel.uri,
+                    edits: [{
+                      text: problem.code,
+                      range: fix
+                    }]
+                  }]
+                }
+              } as monaco.languages.CodeAction
+            })
+      })
+
     reaction(
       () => this.props.store.lintingResult.map(result => ({
         startLine: result.line,
@@ -62,24 +98,44 @@ export default class extends Component<{ store: Store }, {}> {
           : result.endColumn,
         severity: result.severity,
         rule: result.ruleId,
-        message: result.message
+        message: result.message,
+        fix: result.fix
       })),
       reports => this.monaco.editor.setModelMarkers(
         this.editor.getModel() as monaco.editor.ITextModel,
         'eslint',
-        reports.map(report => ({
-          startLineNumber: report.startLine,
-          startColumn: report.startColumn,
-          endLineNumber: report.endLine,
-          endColumn: report.endColumn,
-          severity: report.severity === 2
-            ? this.monaco.Severity.Error as number
-            : this.monaco.Severity.Warning as number,
-          owner: 'eslint',
-          message: report.rule
-            ? `[eslint] ${report.message} (${report.rule})`
-            : `[eslint] ${report.message}`
-        }))
+        reports.map(report => {
+          const textModel = this.editor.getModel() as monaco.editor.ITextModel
+          return {
+            startLineNumber: report.startLine,
+            startColumn: report.startColumn,
+            endLineNumber: report.endLine,
+            endColumn: report.endColumn,
+            severity: report.severity === 2
+              ? this.monaco.Severity.Error as number
+              : this.monaco.Severity.Warning as number,
+            owner: 'eslint',
+            message: report.rule
+              ? `${report.message} (${report.rule})`
+              : `${report.message}`,
+            code: report.fix ? report.fix.text : undefined,
+            source: 'eslint',
+            relatedInformation: report.fix
+              ? [{
+                startLineNumber:
+                  textModel.getPositionAt(report.fix.range[0]).lineNumber,
+                startColumn:
+                  textModel.getPositionAt(report.fix.range[0]).column,
+                endLineNumber:
+                  textModel.getPositionAt(report.fix.range[1]).lineNumber,
+                endColumn:
+                  textModel.getPositionAt(report.fix.range[1]).column,
+                message: report.rule,
+                resource: textModel.uri
+              } as monaco.editor.IRelatedInformation]
+              : undefined
+          } as monaco.editor.IMarkerData
+        })
       )
     )
     reaction(
