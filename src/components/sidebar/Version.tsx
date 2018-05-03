@@ -4,6 +4,7 @@ import { ConfigurationItem } from './ConfigurationItem'
 import eslint from 'eslint/package.json'
 import babelEslint from 'babel-eslint/package.json'
 import typescriptParser from 'typescript-eslint-parser/package.json'
+import vueParser from 'vue-eslint-parser/package.json'
 import pluginPromise from 'eslint-plugin-promise/package.json'
 import pluginReact from 'eslint-plugin-react/package.json'
 import pluginUnicorn from 'eslint-plugin-unicorn/package.json'
@@ -70,6 +71,16 @@ export default class extends Component<{}, State> {
               typescript-eslint-parser
             </Link>
             v{typescriptParser.version}
+          </div>
+          <div>
+            <Link
+              href="https://github.com/mysticatea/vue-eslint-parser"
+              target="_blank"
+              rel="noopener"
+            >
+              vue-eslint-parser
+            </Link>
+            v{vueParser.version}
           </div>
           <div>
             <Link
