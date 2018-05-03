@@ -10,6 +10,7 @@ import pluginReact from 'eslint-plugin-react/package.json'
 import pluginVue from 'eslint-plugin-vue/package.json'
 import pluginUnicorn from 'eslint-plugin-unicorn/package.json'
 import pluginFlowtype from 'eslint-plugin-flowtype/package.json'
+import pluginTypescript from 'eslint-plugin-typescript/package.json'
 
 const Link = styled('a')`
   color: #000;
@@ -132,6 +133,16 @@ export default class extends Component<{}, State> {
               eslint-plugin-flowtype
             </Link>
             v{pluginFlowtype.version}
+          </div>
+          <div>
+            <Link
+              href="https://github.com/nzakas/eslint-plugin-typescript"
+              target="_blank"
+              rel="noopener"
+            >
+              eslint-plugin-typescript
+            </Link>
+            v{pluginTypescript.version}
           </div>
         </ConfigurationItem>
       )

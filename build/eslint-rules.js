@@ -61,13 +61,24 @@ const flowtype =
     })
     .join()
 
+const typescript =
+  fs.readdirSync('node_modules/eslint-plugin-typescript/lib/rules')
+    .filter(isJs)
+    .map(name => {
+      const rule = path.basename(name, '.js')
+      return `'typescript/${rule}': ` +
+        `require('eslint-plugin-typescript/lib/rules/${name}')`
+    })
+    .join()
+
 const rules = [
   core,
   promise,
   react,
   vue,
   unicorn,
-  flowtype
+  flowtype,
+  typescript
 ]
 
 module.exports = `module.exports = () => ({${rules.join()}})`
