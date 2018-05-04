@@ -6,11 +6,26 @@ import {
   set,
   ObservableMap,
 } from 'mobx'
+import debounce from 'lodash.debounce'
 import { Linter } from 'eslint'
 import { lint, loadParser } from './linter'
 
+function getInitialCode (): string {
+  const { hash } = location
+  if (hash) {
+    return decodeURI(hash.slice(1))
+  }
+
+  const storage = localStorage.getItem('code')
+  if (storage) {
+    return storage
+  }
+
+  return 'var a = 0\n'
+}
+
 export class Store {
-  @observable code = 'var a = 0'
+  @observable code = getInitialCode()
   @observable parser = 'espree'
   @observable parserOptions: Linter.ParserOptions = {
     ecmaVersion: 2018,
@@ -148,6 +163,16 @@ reaction(
     env: store.envs,
     settings: store.sharedSettings
   }))
+)
+
+reaction(
+  () => store.code,
+  debounce(code => localStorage.setItem('code', code), 5000)
+)
+
+reaction(
+  () => store.code,
+  code => location.hash = `#${encodeURI(code)}`
 )
 
 reaction(
