@@ -9,6 +9,7 @@ import ParserOptions from './ParserOptions'
 import FormatOptions from './FormatOptions'
 import Env from './Env'
 import SharedSettings from './SharedSettings'
+import Plugins from './Plugins'
 import Rules from './Rules'
 import Version from './Version'
 
@@ -37,7 +38,11 @@ export default class extends Component<{ store: Store }, {}> {
   ) {
     const parser = currentTarget.value
     this.props.store.changeParser(parser)
-    loadingProcess.subscribe(this.lint)
+    loadingProcess.subscribe(message => {
+      if (message === 'parser-loaded') {
+        this.lint()
+      }
+    })
   }
 
   lint () {
@@ -89,6 +94,7 @@ export default class extends Component<{ store: Store }, {}> {
             store.toggleOnlyFilesWithFlowAnnotation
           }
         />
+        <Plugins />
         <Rules
           rules={store.rules}
           onSeverityChange={this.updateRuleSeverity}

@@ -36,7 +36,48 @@ module.exports = {
         loader: 'string-replace-loader',
         options: {
           search: '[\\s\\S]+',
-          replace: require('./eslint-rules'),
+          replace: require('./eslint-rules/core'),
+          flags: 'g'
+        }
+      },
+      {
+        test: path.resolve(
+          'node_modules',
+          'eslint-plugin-flowtype',
+          'dist',
+          'index.js'
+        ),
+        loader: 'string-replace-loader',
+        options: {
+          search: '[\\s\\S]+',
+          replace: require('./eslint-rules/flowtype'),
+          flags: 'g'
+        }
+      },
+      {
+        test: path.resolve(
+          'node_modules',
+          'eslint-plugin-typescript',
+          'lib',
+          'index.js'
+        ),
+        loader: 'string-replace-loader',
+        options: {
+          search: '[\\s\\S]+',
+          replace: require('./eslint-rules/typescript'),
+          flags: 'g'
+        }
+      },
+      {
+        test: path.resolve(
+          'node_modules',
+          'eslint-plugin-unicorn',
+          'index.js'
+        ),
+        loader: 'string-replace-loader',
+        options: {
+          search: '[\\s\\S]+',
+          replace: require('./eslint-rules/unicorn'),
           flags: 'g'
         }
       },

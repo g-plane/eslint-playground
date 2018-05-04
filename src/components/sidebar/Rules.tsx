@@ -3,9 +3,7 @@ import { css } from 'preact-emotion'
 import { observer } from 'mobx-preact'
 import { ConfigurationItem } from './ConfigurationItem'
 import * as eslint from 'eslint'
-import { getRules } from '../../linter'
-
-const availableRules = getRules()
+import { getRules, loadingProcess } from '../../linter'
 
 const serverityStyle = css`
   padding-left: 2px;
@@ -19,76 +17,54 @@ interface Props {
 
 interface State {
   opened: boolean
+  availableRules: Map<string, eslint.Rule.RuleModule>
 }
 
 @observer
 export default class extends Component<Props, State> {
   state = {
-    opened: false
+    opened: false,
+    availableRules: getRules()
   }
-
-  changeSeverity: Map<string, (event: Event) => void> = Array
-    .from(availableRules)
-    .map(([rule]) => [rule, ({ currentTarget }: Event) => {
-      const severity = (currentTarget as HTMLInputElement).value
-      this.props.onSeverityChange(
-        rule,
-        Number.parseInt(severity) as eslint.Linter.Severity
-      )
-    }])
-    .reduce((
-      acc: Map<string, (event: Event) => void>,
-      [rule, fn]
-    ) => acc.set(rule as string, fn as () => void), new Map())
 
   constructor (props) {
     super(props)
     this.onTitleClick = this.onTitleClick.bind(this)
+    this.switchSeverity = this.switchSeverity.bind(this)
+    loadingProcess.subscribe(message => {
+      if (message === 'plugin-loaded') {
+        this.setState({ availableRules: getRules() })
+      }
+    })
   }
 
   onTitleClick () {
     this.setState(prevState => ({ opened: !prevState.opened }))
   }
 
-  render ({ rules }: Props, { opened }: State) {
+  switchSeverity (rule: string, { target }: Event) {
+    const { value } = target as HTMLSelectElement
+    this.props.onSeverityChange(
+      rule,
+      Number.parseInt(value) as eslint.Linter.Severity
+    )
+  }
+
+  render ({ rules }: Props, { opened, availableRules }: State) {
     if (opened) {
       return (
         <ConfigurationItem title="Rules" onClick={this.onTitleClick}>
         {Array.from(availableRules).map(([rule, { meta }]) => (
           <div>
             <div style={{ fontWeight: 'bold' }}>{rule}</div>
-            <div>
-              <label class={serverityStyle}>
-                <input
-                  type="radio"
-                  name={rule}
-                  value="0"
-                  checked={!rules[rule]}
-                  onChange={this.changeSeverity.get(rule)}
-                />
-                Disable
-              </label>
-              <label class={serverityStyle}>
-                <input
-                  type="radio"
-                  name={rule}
-                  value="1"
-                  checked={rules[rule] === 1 || rules[rule] === 'warning'}
-                  onChange={this.changeSeverity.get(rule)}
-                />
-                Warning
-              </label>
-              <label class={serverityStyle}>
-                <input
-                  type="radio"
-                  name={rule}
-                  value="2"
-                  checked={rules[rule] === 2 || rules[rule] === 'error'}
-                  onChange={this.changeSeverity.get(rule)}
-                />
-                Error
-              </label>
-            </div>
+            <select
+              value={rules[rule] || '0'}
+              onChange={e => this.switchSeverity(rule, e)}
+            >
+              <option value="0">Disable</option>
+              <option value="1">Warning</option>
+              <option value="2">Error</option>
+            </select>
           </div>
         ))}
         </ConfigurationItem>
