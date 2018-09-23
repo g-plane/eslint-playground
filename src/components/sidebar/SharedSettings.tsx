@@ -5,8 +5,8 @@ import { ConfigurationItem } from './ConfigurationItem'
 interface Props {
   reactPragma: string
   onlyFilesWithFlowAnnotation: boolean
-  changeReactPragma (pragma: string): void
-  toggleOnlyFilesWithFlowAnnotation (): void
+  changeReactPragma(pragma: string): void
+  toggleOnlyFilesWithFlowAnnotation(): void
 }
 
 interface State {
@@ -19,22 +19,22 @@ export default class extends Component<Props, State> {
     opened: false
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.onTitleClick = this.onTitleClick.bind(this)
     this.changeReactPragma = this.changeReactPragma.bind(this)
   }
 
-  onTitleClick () {
+  onTitleClick() {
     this.setState(prevState => ({ opened: !prevState.opened }))
   }
 
-  changeReactPragma ({ target }: Event) {
+  changeReactPragma({ target }: Event) {
     const { value } = target as HTMLInputElement
     this.props.changeReactPragma(value)
   }
 
-  render (props: Props, { opened }: State) {
+  render(props: Props, { opened }: State) {
     if (opened) {
       return (
         <ConfigurationItem title="Shared Settings" onClick={this.onTitleClick}>

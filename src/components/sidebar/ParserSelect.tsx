@@ -11,7 +11,7 @@ const parsers = [
 
 interface Props {
   currentParser: string,
-  onChange (event: Event): void
+  onChange(event: Event): void
 }
 
 interface State {
@@ -24,16 +24,16 @@ export default class extends Component<Props, State> {
     opened: true
   }
 
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this.onTitleClick = this.onTitleClick.bind(this)
   }
 
-  onTitleClick () {
+  onTitleClick() {
     this.setState(prevState => ({ opened: !prevState.opened }))
   }
 
-  render (
+  render(
     { currentParser, onChange }: Props,
     { opened }: State
   ) {

@@ -18,17 +18,17 @@ export default class extends Component<{ store: Store }, {}> {
   private monaco!: typeof monaco
   private editor!: monaco.editor.IEditor
 
-  render ({ store }) {
+  render({ store }) {
     return (
       <Container id="editor-container" />
     )
   }
 
-  shouldComponentUpdate () {
+  shouldComponentUpdate() {
     return false
   }
 
-  async componentDidMount () {
+  async componentDidMount() {
     // tslint:disable-next-line space-in-parens
     this.monaco = await import(/* webpackPreload: true */ 'monaco-editor')
     this.editor = this.monaco.editor.create(
@@ -202,11 +202,11 @@ export default class extends Component<{ store: Store }, {}> {
     })
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     this.editor.dispose()
   }
 
-  componentWillReceiveProps ({ store: { code } }) {
+  componentWillReceiveProps({ store: { code } }) {
     (this.editor.getModel() as monaco.editor.ITextModel).setValue(code)
   }
 }

@@ -7,8 +7,8 @@ interface Props {
     type: 'space' | 'tab',
     size: number
   }
-  changeIndentType (type: 'space' | 'tab'): void
-  changeIndentSize (size: number): void
+  changeIndentType(type: 'space' | 'tab'): void
+  changeIndentSize(size: number): void
 }
 
 interface State {
@@ -21,30 +21,30 @@ export default class extends Component<Props, State> {
     opened: false
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.onTitleClick = this.onTitleClick.bind(this)
     this.changeIndentType = this.changeIndentType.bind(this)
     this.changeIndentSize = this.changeIndentSize.bind(this)
   }
 
-  onTitleClick () {
+  onTitleClick() {
     this.setState(prevState => ({ opened: !prevState.opened }))
   }
 
-  changeIndentType ({ target }: Event) {
+  changeIndentType({ target }: Event) {
     const { value } = target as HTMLSelectElement
     if (value === 'space' || value === 'tab') {
       this.props.changeIndentType(value)
     }
   }
 
-  changeIndentSize ({ target }: Event) {
+  changeIndentSize({ target }: Event) {
     const { value } = target as HTMLInputElement
     this.props.changeIndentSize(+value)
   }
 
-  render ({ indent }: Props, { opened }: State) {
+  render({ indent }: Props, { opened }: State) {
     if (opened) {
       return (
         <ConfigurationItem title="Format Options" onClick={this.onTitleClick}>

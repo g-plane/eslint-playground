@@ -32,16 +32,16 @@ export default class extends Component<{}, State> {
     opened: false
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.onTitleClick = this.onTitleClick.bind(this)
   }
 
-  onTitleClick () {
+  onTitleClick() {
     this.setState(prevState => ({ opened: !prevState.opened }))
   }
 
-  render ({}, { opened }: State) {
+  render({}, { opened }: State) {
     if (opened) {
       return (
         <ConfigurationItem

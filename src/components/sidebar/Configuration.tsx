@@ -26,14 +26,14 @@ const Sidebar = styled('div')`
 @inject('store')
 @observer
 export default class extends Component<{ store: Store }, {}> {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.onParserChange = this.onParserChange.bind(this)
     this.lint = this.lint.bind(this)
     this.updateRuleSeverity = this.updateRuleSeverity.bind(this)
   }
 
-  onParserChange (
+  onParserChange(
     { currentTarget }: { currentTarget: HTMLInputElement } & Event
   ) {
     const parser = currentTarget.value
@@ -45,7 +45,7 @@ export default class extends Component<{ store: Store }, {}> {
     })
   }
 
-  lint () {
+  lint() {
     const {
       code,
       parser,
@@ -64,12 +64,12 @@ export default class extends Component<{ store: Store }, {}> {
     }))
   }
 
-  updateRuleSeverity (ruleId: string, severity: Linter.Severity) {
+  updateRuleSeverity(ruleId: string, severity: Linter.Severity) {
     this.props.store.updateRuleSeverity(ruleId, severity)
     this.lint()
   }
 
-  render ({ store }: { store: Store }) {
+  render({ store }: { store: Store }) {
     return (
       <Sidebar>
         <ParserSelect

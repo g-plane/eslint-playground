@@ -32,7 +32,7 @@ const availableEnvs = [
 
 interface Props {
   envs: { [name: string]: boolean }
-  toggleEnv (env: string): void
+  toggleEnv(env: string): void
 }
 
 interface State {
@@ -45,16 +45,16 @@ export default class extends Component<Props, State> {
     opened: false
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.onTitleClick = this.onTitleClick.bind(this)
   }
 
-  onTitleClick () {
+  onTitleClick() {
     this.setState(prevState => ({ opened: !prevState.opened }))
   }
 
-  render ({ envs, toggleEnv }: Props, { opened }: State) {
+  render({ envs, toggleEnv }: Props, { opened }: State) {
     if (opened) {
       return (
         <ConfigurationItem

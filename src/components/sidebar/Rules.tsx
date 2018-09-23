@@ -12,7 +12,7 @@ const serverityStyle = css`
 
 interface Props {
   rules: NonNullable<eslint.Linter.Config['rules']>
-  onSeverityChange (ruleId: string, severity: eslint.Linter.Severity): void
+  onSeverityChange(ruleId: string, severity: eslint.Linter.Severity): void
 }
 
 interface State {
@@ -27,7 +27,7 @@ export default class extends Component<Props, State> {
     availableRules: getRules()
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.onTitleClick = this.onTitleClick.bind(this)
     this.switchSeverity = this.switchSeverity.bind(this)
@@ -38,11 +38,11 @@ export default class extends Component<Props, State> {
     })
   }
 
-  onTitleClick () {
+  onTitleClick() {
     this.setState(prevState => ({ opened: !prevState.opened }))
   }
 
-  switchSeverity (rule: string, { target }: Event) {
+  switchSeverity(rule: string, { target }: Event) {
     const { value } = target as HTMLSelectElement
     this.props.onSeverityChange(
       rule,
@@ -50,7 +50,7 @@ export default class extends Component<Props, State> {
     )
   }
 
-  render ({ rules }: Props, { opened, availableRules }: State) {
+  render({ rules }: Props, { opened, availableRules }: State) {
     if (opened) {
       return (
         <ConfigurationItem title="Rules" onClick={this.onTitleClick}>

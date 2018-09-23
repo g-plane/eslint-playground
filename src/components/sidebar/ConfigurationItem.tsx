@@ -43,7 +43,7 @@ const listItemStyle = css`
 `
 
 class ListItem extends Component<{}, {}> {
-  render () {
+  render() {
     return <li class={listItemStyle}>{this.props.children}</li>
   }
 }
@@ -51,11 +51,11 @@ class ListItem extends Component<{}, {}> {
 interface Props {
   title: string,
   class?: string,
-  onClick (event: MouseEvent): void
+  onClick(event: MouseEvent): void
 }
 
 export class ConfigurationItem extends Component<Props, {}> {
-  render ({ title, onClick }) {
+  render({ title, onClick }) {
     return (
       <Container>
         <Header onClick={onClick}>{title}</Header>

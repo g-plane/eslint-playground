@@ -46,7 +46,7 @@ const ListItem = styled('li')`
 @inject('store')
 @observer
 export default class extends Component<{ store: Store }> {
-  render ({ store }: { store: Store }) {
+  render({ store }: { store: Store }) {
     return (
       <Container>
         <List>

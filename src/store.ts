@@ -10,7 +10,7 @@ import debounce from 'lodash.debounce'
 import { Linter } from 'eslint'
 import { lint, loadParser } from './linter'
 
-function getInitialCode (): string {
+function getInitialCode(): string {
   const { hash } = location
   if (hash) {
     return decodeURI(hash.slice(1))
@@ -53,7 +53,7 @@ export class Store {
     size: number
   } = { type: 'space', size: 2 }
 
-  @computed get linterReports () {
+  @computed get linterReports() {
     return this.lintingResult
       .map(message => ({
         severity: message.severity,
@@ -64,11 +64,11 @@ export class Store {
       }))
   }
 
-  @computed get envs () {
+  @computed get envs() {
     return this.envsList.toJSON()
   }
 
-  @computed get sharedSettings () {
+  @computed get sharedSettings() {
     return {
       react: {
         pragma: this.reactPragma
@@ -80,22 +80,22 @@ export class Store {
   }
 
   @action
-  changeParser (parser: string) {
+  changeParser(parser: string) {
     this.parser = parser
   }
 
   @action
-  updateCode (code: string) {
+  updateCode(code: string) {
     this.code = code
   }
 
   @action.bound
-  updateParserOptions (options: Linter.ParserOptions) {
+  updateParserOptions(options: Linter.ParserOptions) {
     this.parserOptions = { ...this.parserOptions, ...options }
   }
 
   @action
-  updateRuleSeverity (ruleId: string, severity: Linter.RuleLevel) {
+  updateRuleSeverity(ruleId: string, severity: Linter.RuleLevel) {
     const rule = this.rules[ruleId]
     if (Array.isArray(rule)) {
       rule[0] = severity
@@ -106,37 +106,37 @@ export class Store {
   }
 
   @action.bound
-  replaceRules (rules: Linter.Config['rules'] = {}) {
+  replaceRules(rules: Linter.Config['rules'] = {}) {
     this.rules = rules
   }
 
   @action.bound
-  toggleEnv (name: string) {
+  toggleEnv(name: string) {
     this.envsList.set(name, !this.envsList.get(name))
   }
 
   @action
-  updateLintingResult (result: Linter.LintMessage[]) {
+  updateLintingResult(result: Linter.LintMessage[]) {
     this.lintingResult = result
   }
 
   @action.bound
-  changeReactPragma (pragma: string) {
+  changeReactPragma(pragma: string) {
     this.reactPragma = pragma
   }
 
   @action.bound
-  toggleOnlyFilesWithFlowAnnotation () {
+  toggleOnlyFilesWithFlowAnnotation() {
     this.onlyFilesWithFlowAnnotation = !this.onlyFilesWithFlowAnnotation
   }
 
   @action.bound
-  changeIndentType (type: 'space' | 'tab') {
+  changeIndentType(type: 'space' | 'tab') {
     set(this.indent, 'type', type)
   }
 
   @action.bound
-  changeIndentSize (size: number) {
+  changeIndentSize(size: number) {
     if (size >= 0) {
       set(this.indent, 'size', size)
     }

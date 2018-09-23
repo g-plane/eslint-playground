@@ -11,7 +11,7 @@ const parsers = [
 
 interface Props {
   currentParser: string
-  updateParserOptions (options: Linter.ParserOptions): void
+  updateParserOptions(options: Linter.ParserOptions): void
 }
 
 interface State {
@@ -24,22 +24,22 @@ export default class extends Component<Props, State> {
     opened: false
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.onTitleClick = this.onTitleClick.bind(this)
     this.changeParser = this.changeParser.bind(this)
   }
 
-  onTitleClick () {
+  onTitleClick() {
     this.setState(prevState => ({ opened: !prevState.opened }))
   }
 
-  changeParser ({ target }: Event) {
+  changeParser({ target }: Event) {
     const { value } = target as HTMLSelectElement
     this.props.updateParserOptions({ parser: value })
   }
 
-  render (props: Props, { opened }: State) {
+  render(props: Props, { opened }: State) {
     if (opened) {
       return (
         <ConfigurationItem title="Parser Options" onClick={this.onTitleClick}>
