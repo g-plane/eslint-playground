@@ -139,8 +139,8 @@ export default class extends Component<{ store: Store }, {}> {
             endLineNumber: report.endLine,
             endColumn: report.endColumn,
             severity: report.severity === 2
-              ? this.monaco.Severity.Error as number
-              : this.monaco.Severity.Warning as number,
+              ? this.monaco.MarkerSeverity.Error as number
+              : this.monaco.MarkerSeverity.Warning as number,
             owner: 'eslint',
             message: report.rule
               ? `${report.message} (${report.rule})`

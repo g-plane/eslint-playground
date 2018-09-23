@@ -1,4 +1,4 @@
-import { h, Component } from 'preact'
+import { h, Component, ComponentChild } from 'preact'
 import styled, { css } from 'preact-emotion'
 
 const Container = styled('div')`
@@ -62,7 +62,7 @@ export class ConfigurationItem extends Component<Props, {}> {
         <ul class={listStyle}>
         {
           this.props.children
-            ? this.props.children.map(child => (
+            ? (this.props.children as ComponentChild[]).map(child => (
               <ListItem>{child}</ListItem>
             ))
             : null
