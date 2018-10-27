@@ -39,7 +39,7 @@
     "prop-types": "^15.6.1",
     "rxjs": "^6.0.0",
     "typescript": "^3.0.3",
-    "typescript-eslint-parser": "^18.0.0",
+    "typescript-eslint-parser": "^20.0.0",
     "vue-eslint-parser": "^3.2.2"
   },
   "devDependencies": {
