@@ -1,7 +1,9 @@
 declare module 'preact-emotion' {
   import * as preact from 'preact'
 
-  function styled (tag: string): (style: TemplateStringsArray) => preact.ComponentConstructor<any, any>
+  function styled(
+    tag: string
+  ): (style: TemplateStringsArray) => preact.ComponentConstructor<any, any>
 
   export default styled
   export * from 'emotion'
@@ -14,6 +16,6 @@ declare module 'eslint/lib/linter' {
 }
 
 declare module '*/package.json' {
-  let pkg: { name: string, version: string }
+  let pkg: { name: string; version: string }
   export default pkg
 }

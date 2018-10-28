@@ -10,7 +10,7 @@
     "dev": "webpack-serve --config=build/webpack.dev.js",
     "build": "webpack --progress --config=build/webpack.prod.js",
     "test": "tsc -p . --noEmit",
-    "lint": "tslint --formatters-dir ./node_modules/tslint-formatter-beauty -t beauty -p ."
+    "format": "prettier --write ./src/**/*.{ts,tsx,js} ./build/**/*.js"
   },
   "serve": {
     "dev": {
@@ -23,7 +23,7 @@
   "dependencies": {
     "babel-eslint": "^10.0.1",
     "emotion": "^9.1.2",
-    "eslint": "^5.6.0",
+    "eslint": "^5.8.0",
     "eslint-plugin-flowtype": "^2.46.3",
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-react": "^7.7.0",
@@ -50,15 +50,14 @@
     "@types/eslint": "^4.16.1",
     "babel-loader": "^8.0.4",
     "css-loader": "^1.0.0",
-    "eslint-config-gplane": "^3.1.0",
     "gh-pages": "^1.1.0",
     "html-webpack-plugin": "^3.2.0",
     "monaco-editor-webpack-plugin": "^1.5.4",
+    "prettier": "^1.14.3",
     "string-replace-loader": "^2.1.1",
     "style-loader": "^0.21.0",
     "thread-loader": "^1.1.5",
     "ts-loader": "^5.1.1",
-    "tslint": "^5.11.0",
     "tslint-config-gplane": "^3.1.0",
     "tslint-formatter-beauty": "^1.2.0",
     "uglifyjs-webpack-plugin": "^1.2.5",

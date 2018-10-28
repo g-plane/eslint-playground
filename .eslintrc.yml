@@ -1,9 +1,0 @@
-extends: gplane/react
-env:
-  browser: true
-rules:
-  react/jsx-uses-vars: 2
-  react/jsx-uses-react: 2
-settings:
-  react:
-    pragma: h

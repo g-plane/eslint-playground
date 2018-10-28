@@ -8,8 +8,8 @@ import Editor from './components/Editor'
 import Reports from './components/Reports'
 
 const AppFrame = styled('div')`
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
+    sans-serif;
   min-height: 100vh;
 `
 

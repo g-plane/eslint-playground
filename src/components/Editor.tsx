@@ -2,7 +2,7 @@ import { h, Component } from 'preact'
 import styled from 'preact-emotion'
 import { reaction } from 'mobx'
 import { observer, inject } from 'mobx-preact'
-import { Store } from '../store'  // tslint:disable-line no-unused-variable
+import { Store } from '../store' // tslint:disable-line no-unused-variable
 import { lint } from '../linter'
 import * as monaco from 'monaco-editor'
 import { positioning } from './Reports'
@@ -19,9 +19,7 @@ export default class extends Component<{ store: Store }, {}> {
   private editor!: monaco.editor.IEditor
 
   render({ store }) {
-    return (
-      <Container id="editor-container" />
-    )
+    return <Container id="editor-container" />
   }
 
   shouldComponentUpdate() {
@@ -44,16 +42,13 @@ export default class extends Component<{ store: Store }, {}> {
       }
     )
 
-    this
-      .monaco
-      .languages
-      .typescript
-      .javascriptDefaults
-      .setDiagnosticsOptions({ noSyntaxValidation: true })
+    this.monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
+      noSyntaxValidation: true
+    })
 
     const model = this.editor.getModel() as monaco.editor.ITextModel
-    model.onDidChangeContent(
-      () => this.props.store.updateCode(model.getValue())
+    model.onDidChangeContent(() =>
+      this.props.store.updateCode(model.getValue())
     )
     reaction(
       () => this.props.store.indent.type,
@@ -81,8 +76,7 @@ export default class extends Component<{ store: Store }, {}> {
         context: monaco.languages.CodeActionContext,
         token: monaco.CancellationToken
       ) =>
-        context
-          .markers
+        context.markers
           .filter(marker => marker.source === 'eslint')
           .filter(({ relatedInformation }) => relatedInformation)
           .map(problem => {
@@ -91,79 +85,86 @@ export default class extends Component<{ store: Store }, {}> {
               title: `Fix this ${fix.message} problem`,
               diagnostics: [problem],
               edit: {
-                edits: [{
-                  resource: textModel.uri,
-                  edits: [{
-                    text: problem.code,
-                    range: fix
-                  }]
-                }]
+                edits: [
+                  {
+                    resource: textModel.uri,
+                    edits: [
+                      {
+                        text: problem.code,
+                        range: fix
+                      }
+                    ]
+                  }
+                ]
               }
             } as monaco.languages.CodeAction
           })
     }
-    this
-      .monaco
-      .languages
-      .registerCodeActionProvider('javascript', codeActionProvider)
-    this
-      .monaco
-      .languages
-      .registerCodeActionProvider('typescript', codeActionProvider)
-    this
-      .monaco
-      .languages
-      .registerCodeActionProvider('html', codeActionProvider)
+    this.monaco.languages.registerCodeActionProvider(
+      'javascript',
+      codeActionProvider
+    )
+    this.monaco.languages.registerCodeActionProvider(
+      'typescript',
+      codeActionProvider
+    )
+    this.monaco.languages.registerCodeActionProvider('html', codeActionProvider)
 
     reaction(
-      () => this.props.store.lintingResult.map(result => ({
-        startLine: result.line,
-        startColumn: result.column,
-        endLine: result.endLine === undefined ? result.line : result.endLine,
-        endColumn: result.endColumn === undefined
-          ? result.column
-          : result.endColumn,
-        severity: result.severity,
-        rule: result.ruleId,
-        message: result.message,
-        fix: result.fix
-      })),
-      reports => this.monaco.editor.setModelMarkers(
-        this.editor.getModel() as monaco.editor.ITextModel,
-        'eslint',
-        reports.map(report => {
-          const textModel = this.editor.getModel() as monaco.editor.ITextModel
-          return {
-            startLineNumber: report.startLine,
-            startColumn: report.startColumn,
-            endLineNumber: report.endLine,
-            endColumn: report.endColumn,
-            severity: report.severity === 2
-              ? this.monaco.MarkerSeverity.Error as number
-              : this.monaco.MarkerSeverity.Warning as number,
-            owner: 'eslint',
-            message: report.rule
-              ? `${report.message} (${report.rule})`
-              : `${report.message}`,
-            code: report.fix ? report.fix.text : undefined,
-            source: 'eslint',
-            relatedInformation: report.fix
-              ? [{
-                startLineNumber:
-                  textModel.getPositionAt(report.fix.range[0]).lineNumber,
-                startColumn:
-                  textModel.getPositionAt(report.fix.range[0]).column,
-                endLineNumber:
-                  textModel.getPositionAt(report.fix.range[1]).lineNumber,
-                endColumn:
-                  textModel.getPositionAt(report.fix.range[1]).column,
-                message: report.rule,
-                resource: textModel.uri
-              } as monaco.editor.IRelatedInformation]
-              : undefined
-          } as monaco.editor.IMarkerData
-        })
-      )
+      () =>
+        this.props.store.lintingResult.map(result => ({
+          startLine: result.line,
+          startColumn: result.column,
+          endLine: result.endLine === undefined ? result.line : result.endLine,
+          endColumn:
+            result.endColumn === undefined ? result.column : result.endColumn,
+          severity: result.severity,
+          rule: result.ruleId,
+          message: result.message,
+          fix: result.fix
+        })),
+      reports =>
+        this.monaco.editor.setModelMarkers(
+          this.editor.getModel() as monaco.editor.ITextModel,
+          'eslint',
+          reports.map(report => {
+            const textModel = this.editor.getModel() as monaco.editor.ITextModel
+            return {
+              startLineNumber: report.startLine,
+              startColumn: report.startColumn,
+              endLineNumber: report.endLine,
+              endColumn: report.endColumn,
+              severity:
+                report.severity === 2
+                  ? (this.monaco.MarkerSeverity.Error as number)
+                  : (this.monaco.MarkerSeverity.Warning as number),
+              owner: 'eslint',
+              message: report.rule
+                ? `${report.message} (${report.rule})`
+                : `${report.message}`,
+              code: report.fix ? report.fix.text : undefined,
+              source: 'eslint',
+              relatedInformation: report.fix
+                ? [
+                    {
+                      startLineNumber: textModel.getPositionAt(
+                        report.fix.range[0]
+                      ).lineNumber,
+                      startColumn: textModel.getPositionAt(report.fix.range[0])
+                        .column,
+                      endLineNumber: textModel.getPositionAt(
+                        report.fix.range[1]
+                      ).lineNumber,
+                      endColumn: textModel.getPositionAt(report.fix.range[1])
+                        .column,
+                      message: report.rule,
+                      resource: textModel.uri
+                    } as monaco.editor.IRelatedInformation
+                  ]
+                : undefined
+            } as monaco.editor.IMarkerData
+          })
+        )
     )
     reaction(
       () => this.props.store.parser,
@@ -187,14 +188,16 @@ export default class extends Component<{ store: Store }, {}> {
       }
     )
 
-    this.props.store.updateLintingResult(lint({
-      code: this.props.store.code,
-      parserName: this.props.store.parser,
-      parserOptions: this.props.store.parserOptions,
-      rules: this.props.store.rules,
-      env: this.props.store.envs,
-      settings: this.props.store.sharedSettings
-    }))
+    this.props.store.updateLintingResult(
+      lint({
+        code: this.props.store.code,
+        parserName: this.props.store.parser,
+        parserOptions: this.props.store.parserOptions,
+        rules: this.props.store.rules,
+        env: this.props.store.envs,
+        settings: this.props.store.sharedSettings
+      })
+    )
 
     positioning.subscribe(([line, column]) => {
       this.editor.setPosition({ lineNumber: line, column })
@@ -207,6 +210,6 @@ export default class extends Component<{ store: Store }, {}> {
   }
 
   componentWillReceiveProps({ store: { code } }) {
-    (this.editor.getModel() as monaco.editor.ITextModel).setValue(code)
+    ;(this.editor.getModel() as monaco.editor.ITextModel).setValue(code)
   }
 }

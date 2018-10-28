@@ -4,7 +4,7 @@ import {
   computed,
   reaction,
   set,
-  ObservableMap,
+  ObservableMap
 } from 'mobx'
 import debounce from 'lodash.debounce'
 import { Linter } from 'eslint'
@@ -25,50 +25,61 @@ function getInitialCode(): string {
 }
 
 export class Store {
-  @observable code = getInitialCode()
-  @observable parser = 'espree'
-  @observable parserOptions: Linter.ParserOptions = {
+  @observable
+  code = getInitialCode()
+  @observable
+  parser = 'espree'
+  @observable
+  parserOptions: Linter.ParserOptions = {
     ecmaVersion: 2018,
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true
     }
   }
-  @observable rules: NonNullable<Linter.Config['rules']> = {
+  @observable
+  rules: NonNullable<Linter.Config['rules']> = {
     'no-var': 2,
     'no-undef': 2,
     eqeqeq: 2,
     'no-unused-vars': 1,
-    'no-unused-expressions': 2,
+    'no-unused-expressions': 2
   }
-  @observable envsList = new Map([
-    ['browser', true],
-    ['es6', true]
-  ]) as ObservableMap<string, boolean>
-  @observable lintingResult: Linter.LintMessage[] = []
-  @observable reactPragma = 'React'
-  @observable onlyFilesWithFlowAnnotation = true
-  @observable indent: {
-    type: 'space' | 'tab',
+  @observable
+  envsList = new Map([['browser', true], ['es6', true]]) as ObservableMap<
+    string,
+    boolean
+  >
+  @observable
+  lintingResult: Linter.LintMessage[] = []
+  @observable
+  reactPragma = 'React'
+  @observable
+  onlyFilesWithFlowAnnotation = true
+  @observable
+  indent: {
+    type: 'space' | 'tab'
     size: number
   } = { type: 'space', size: 2 }
 
-  @computed get linterReports() {
-    return this.lintingResult
-      .map(message => ({
-        severity: message.severity,
-        ruleId: message.ruleId,
-        message: message.message,
-        line: message.line,
-        column: message.column
-      }))
+  @computed
+  get linterReports() {
+    return this.lintingResult.map(message => ({
+      severity: message.severity,
+      ruleId: message.ruleId,
+      message: message.message,
+      line: message.line,
+      column: message.column
+    }))
   }
 
-  @computed get envs() {
+  @computed
+  get envs() {
     return this.envsList.toJSON()
   }
 
-  @computed get sharedSettings() {
+  @computed
+  get sharedSettings() {
     return {
       react: {
         pragma: this.reactPragma
@@ -145,24 +156,23 @@ export class Store {
 
 const store = new Store()
 
-reaction(
-  () => store.parser,
-  loadParser,
-  {
-    fireImmediately: true
-  }
-)
+reaction(() => store.parser, loadParser, {
+  fireImmediately: true
+})
 
 reaction(
   () => store.code,
-  code => store.updateLintingResult(lint({
-    code,
-    parserName: store.parser,
-    parserOptions: store.parserOptions,
-    rules: store.rules,
-    env: store.envs,
-    settings: store.sharedSettings
-  }))
+  code =>
+    store.updateLintingResult(
+      lint({
+        code,
+        parserName: store.parser,
+        parserOptions: store.parserOptions,
+        rules: store.rules,
+        env: store.envs,
+        settings: store.sharedSettings
+      })
+    )
 )
 
 reaction(
@@ -170,69 +180,81 @@ reaction(
   debounce(code => localStorage.setItem('code', code), 5000)
 )
 
-reaction(
-  () => store.code,
-  code => location.hash = `#${encodeURI(code)}`
-)
+reaction(() => store.code, code => (location.hash = `#${encodeURI(code)}`))
 
 reaction(
   () => store.rules,
-  rules => store.updateLintingResult(lint({
-    code: store.code,
-    parserName: store.parser,
-    parserOptions: store.parserOptions,
-    rules,
-    env: store.envs,
-    settings: store.sharedSettings
-  }))
+  rules =>
+    store.updateLintingResult(
+      lint({
+        code: store.code,
+        parserName: store.parser,
+        parserOptions: store.parserOptions,
+        rules,
+        env: store.envs,
+        settings: store.sharedSettings
+      })
+    )
 )
 
 reaction(
   () => store.parserOptions,
-  parserOptions => store.updateLintingResult(lint({
-    code: store.code,
-    parserName: store.parser,
-    parserOptions,
-    rules: store.rules,
-    env: store.envs,
-    settings: store.sharedSettings
-  }))
+  parserOptions =>
+    store.updateLintingResult(
+      lint({
+        code: store.code,
+        parserName: store.parser,
+        parserOptions,
+        rules: store.rules,
+        env: store.envs,
+        settings: store.sharedSettings
+      })
+    )
 )
 
 reaction(
   () => store.envs,
-  envs => store.updateLintingResult(lint({
-    code: store.code,
-    parserName: store.parser,
-    parserOptions: store.parserOptions,
-    rules: store.rules,
-    env: envs,
-    settings: store.sharedSettings
-  }))
+  envs =>
+    store.updateLintingResult(
+      lint({
+        code: store.code,
+        parserName: store.parser,
+        parserOptions: store.parserOptions,
+        rules: store.rules,
+        env: envs,
+        settings: store.sharedSettings
+      })
+    )
 )
 
 reaction(
   () => store.reactPragma,
-  () => store.updateLintingResult(lint({
-    code: store.code,
-    parserName: store.parser,
-    parserOptions: store.parserOptions,
-    rules: store.rules,
-    env: store.envs,
-    settings: store.sharedSettings
-  }))
+  () =>
+    store.updateLintingResult(
+      lint({
+        code: store.code,
+        parserName: store.parser,
+        parserOptions: store.parserOptions,
+        rules: store.rules,
+        env: store.envs,
+        settings: store.sharedSettings
+      })
+    )
 )
 
 reaction(
   () => store.onlyFilesWithFlowAnnotation,
-  () => store.updateLintingResult(lint({
-    code: store.code,
-    parserName: store.parser,
-    parserOptions: store.parserOptions,
-    rules: store.rules,
-    env: store.envs,
-    settings: store.sharedSettings
-  }))
+  () =>
+    store.updateLintingResult(
+      lint({
+        code: store.code,
+        parserName: store.parser,
+        parserOptions: store.parserOptions,
+        rules: store.rules,
+        env: store.envs,
+        settings: store.sharedSettings
+      })
+    )
 )
 
 export default store
