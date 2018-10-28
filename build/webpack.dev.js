@@ -30,4 +30,9 @@ module.exports = merge(base, {
     }
   },
   devtool: 'inline-source-map',
+  devServer: {
+    clientLogLevel: 'error',
+    hot: true,
+    publicPath: '/'
+  }
 })
