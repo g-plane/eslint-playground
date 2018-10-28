@@ -48,7 +48,7 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "@types/eslint": "^4.16.1",
-    "babel-loader": "^8.0.2",
+    "babel-loader": "^8.0.4",
     "css-loader": "^0.28.11",
     "eslint-config-gplane": "^3.1.0",
     "gh-pages": "^1.1.0",
