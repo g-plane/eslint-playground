@@ -1,3 +1,5 @@
+if (process.env.CIRCLE_PULL_REQUEST) process.exit()
+
 const fs = require('fs')
 const ghpages = require('gh-pages')
 
