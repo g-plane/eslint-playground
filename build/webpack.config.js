@@ -103,6 +103,14 @@ module.exports = {
             'require("typescript-eslint-parser") : require("espree")))',
         },
       },
+      {
+        test: /babel-eslint/,
+        loader: 'string-replace-loader',
+        options: {
+          search: 'require("./patch-eslint-scope")',
+          replace: ''
+        }
+      },
     ]
   },
   plugins: [
