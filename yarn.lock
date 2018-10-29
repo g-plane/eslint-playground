@@ -6267,10 +6267,10 @@ tslib@^1.9.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.0.tgz#e37a86fda8cbbaf23a057f473c9f4dc64e5fc2e8"
   integrity sha512-f/qGG2tUkrISBlQZEjEqoZ3B2+npJjIf04H1wuAv9iA8i04Icp+61KRXxFdha22670NJopsZCIjhC3SnjPRKrQ==
 
-tslint-formatter-beauty@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/tslint-formatter-beauty/-/tslint-formatter-beauty-1.2.0.tgz#0d6829f9f26c045d66c122b67874932dc2a90270"
-  integrity sha1-DWgp+fJsBF1mwSK2eHSTLcKpAnA=
+tslint-formatter-beauty@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/tslint-formatter-beauty/-/tslint-formatter-beauty-3.0.0.tgz#05e2d356576e7b173c4220e75d83111f03af4c5c"
+  integrity sha512-z4IR0y8OUMoMw1CPrG2gNGA3HZ+NKHktjNH9YnG+EB6p6wW+GkEpkvolaaGtJYzxuoVKFMhovoteRXeYo0kWeg==
   dependencies:
     "@babel/highlight" "^7.0.0-beta.44"
     ansi-styles "^3.2.1"
