@@ -27,7 +27,7 @@
     "mobx-preact": "^2.0.0",
     "monaco-editor": "^0.14.3",
     "preact": "^8.3.1",
-    "preact-emotion": "^9.2.10",
+    "preact-emotion": "^9.2.12",
     "prop-types": "^15.6.2",
     "rxjs": "^6.3.3",
     "typescript": "^3.1.3",
