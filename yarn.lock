@@ -4319,10 +4319,10 @@ mkdirp@0.5.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0:
   dependencies:
     minimist "0.0.8"
 
-mobx-preact@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/mobx-preact/-/mobx-preact-2.0.0.tgz#0d2fc6c06ecb1c29c852a6f5bc6a85008916c0ec"
-  integrity sha1-DS/GwG7LHCnIUqb1vGqFAIkWwOw=
+mobx-preact@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/mobx-preact/-/mobx-preact-3.0.0.tgz#683f1805e4727570c8ece1561a25f34773b7b601"
+  integrity sha1-aD8YBeRydXDI7OFWGiXzR3O3tgE=
   dependencies:
     hoist-non-react-statics "^2.3.1"
 
