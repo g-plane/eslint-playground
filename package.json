@@ -45,7 +45,7 @@
     "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^3.2.0",
     "monaco-editor-webpack-plugin": "^1.5.4",
-    "prettier": "^1.14.3",
+    "prettier": "^1.15.2",
     "string-replace-loader": "^2.1.1",
     "style-loader": "^0.23.1",
     "terser-webpack-plugin": "^1.1.0",
