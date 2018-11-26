@@ -32,7 +32,7 @@
     "rxjs": "^6.3.3",
     "typescript": "^3.1.6",
     "typescript-eslint-parser": "^21.0.1",
-    "vue-eslint-parser": "^3.2.2"
+    "vue-eslint-parser": "^3.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
