@@ -1,5 +1,5 @@
 <template>
-  <configuration-item title="Rules">
+  <ConfigurationItem title="Rules">
     <li v-for="rule in getRules" :key="rule">
       <div>
         <div class="rule-name">{{ rule }}</div>
@@ -10,7 +10,7 @@
         </select>
       </div>
     </li>
-  </configuration-item>
+  </ConfigurationItem>
 </template>
 
 <script>

@@ -1,16 +1,16 @@
 <template>
-  <configuration-item title="Parser" :initial-expanded="true">
+  <ConfigurationItem title="Parser" :initial-expanded="true">
     <li v-for="parser in parsers" :key="parser">
       <label>
         <input
+          v-model="current"
           type="radio"
           name="parser"
           :value="parser"
-          v-model="current"
-        />&nbsp;{{ parser }}
+        >&nbsp;{{ parser }}
       </label>
     </li>
-  </configuration-item>
+  </ConfigurationItem>
 </template>
 
 <script>

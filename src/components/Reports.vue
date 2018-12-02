@@ -8,8 +8,8 @@
         @click="locate({ line: report.startLine, column: report.startColumn })"
       >
         <span class="tiny-spacing">
-          <icon-error v-if="report.severity === 2" />
-          <icon-warning v-else />
+          <IconError v-if="report.severity === 2" />
+          <IconWarning v-else />
         </span>
         <span class="tiny-spacing">{{ report.message }}</span>
         <span v-if="report.rule" class="tiny-spacing">
@@ -32,7 +32,9 @@ export default {
     IconError,
     IconWarning
   },
-  props: ['reports'],
+  props: {
+    reports: Array
+  },
   methods: {
     locate(position) {
       emitter.emit('editor-locate', position)

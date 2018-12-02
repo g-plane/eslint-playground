@@ -9,7 +9,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint --format=beauty"
   },
   "dependencies": {
     "babel-eslint": "^10.0.1",
@@ -34,6 +34,8 @@
     "@vue/cli-service": "^3.2.0",
     "@vue/eslint-config-prettier": "^4.0.0",
     "eslint": "^5.9.0",
+    "eslint-config-gplane": "^3.4.0",
+    "eslint-formatter-beauty": "^3.0.0",
     "monaco-editor-webpack-plugin": "^1.7.0",
     "string-replace-loader": "^2.1.1",
     "stylus": "^0.54.5",

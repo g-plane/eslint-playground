@@ -1,16 +1,16 @@
 <template>
-  <configuration-item title="Environments">
+  <ConfigurationItem title="Environments">
     <li v-for="env in envs" :key="env">
       <label>
         <input
           type="checkbox"
-          @change="toggleEnv"
           :value="env"
           :checked="enabled.includes(env)"
-        />{{ env }}
+          @change="toggleEnv"
+        >{{ env }}
       </label>
     </li>
-  </configuration-item>
+  </ConfigurationItem>
 </template>
 
 <script>

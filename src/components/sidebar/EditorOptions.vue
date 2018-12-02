@@ -1,5 +1,5 @@
 <template>
-  <configuration-item title="Editor Options">
+  <ConfigurationItem title="Editor Options">
     <li>
       <div>
         Indent type:
@@ -10,7 +10,7 @@
       </div>
     </li>
     <li>
-      <label>Indent size:&nbsp; <input type="number" v-model="size"/></label>
+      <label>Indent size:&nbsp; <input v-model="size" type="number"></label>
     </li>
     <li>
       <div>
@@ -22,12 +22,12 @@
       </div>
     </li>
     <li>
-      <div>Font size: <input type="number" v-model="fontSize" /></div>
+      <div>Font size: <input v-model="fontSize" type="number"></div>
     </li>
     <li>
-      <div>Font family: <input v-model="fontFamily" /></div>
+      <div>Font family: <input v-model="fontFamily"></div>
     </li>
-  </configuration-item>
+  </ConfigurationItem>
 </template>
 
 <script>

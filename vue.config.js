@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const path = require('path')
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 

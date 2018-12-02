@@ -1,9 +1,9 @@
 <template>
-  <configuration-item title="3rd-party Plugins">
-    <li @click="loadPlugin(plugin)" v-for="plugin in plugins" :key="plugin">
+  <ConfigurationItem title="3rd-party Plugins">
+    <li v-for="plugin in plugins" :key="plugin" @click="loadPlugin(plugin)">
       Load eslint-plugin-{{ plugin }}
     </li>
-  </configuration-item>
+  </ConfigurationItem>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <configuration-item title="Shared Settings">
+  <ConfigurationItem title="Shared Settings">
     <li>
       <label>
         React Pragma:
@@ -8,7 +8,7 @@
           style="margin-left: 5px"
           :value="$store.state.eslint.settings.reactPragma"
           @input="changeReactPragma"
-        />
+        >
       </label>
     </li>
     <li>
@@ -17,11 +17,11 @@
           type="checkbox"
           :checked="$store.state.eslint.settings.onlyFilesWithFlowAnnotation"
           @change="toggleOnlyFilesWithFlowAnnotation"
-        />
+        >
         Only files with flow annotation
       </label>
     </li>
-  </configuration-item>
+  </ConfigurationItem>
 </template>
 
 <script>

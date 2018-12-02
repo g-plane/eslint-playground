@@ -4,7 +4,7 @@
       {{ title }}
     </label>
     <ul v-if="expanded" class="list">
-      <slot></slot>
+      <slot />
     </ul>
   </div>
 </template>

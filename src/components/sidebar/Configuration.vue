@@ -1,11 +1,13 @@
 <template>
   <div class="sidebar">
-    <parser-select />
-    <parser-options />
-    <editor-options />
-    <env />
-    <shared-settings />
-    <plugins /> <rules /> <versions />
+    <ParserSelect />
+    <ParserOptions />
+    <EditorOptions />
+    <Env />
+    <SharedSettings />
+    <Plugins />
+    <Rules />
+    <Versions />
   </div>
 </template>
 

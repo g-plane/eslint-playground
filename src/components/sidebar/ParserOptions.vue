@@ -1,5 +1,5 @@
 <template>
-  <configuration-item title="Parser Options">
+  <ConfigurationItem title="Parser Options">
     <li>
       <div>
         Parser:
@@ -14,7 +14,7 @@
         <div>(Only available when using "vue-eslint-parser")</div>
       </div>
     </li>
-  </configuration-item>
+  </ConfigurationItem>
 </template>
 
 <script>

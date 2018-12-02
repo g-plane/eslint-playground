@@ -1,10 +1,11 @@
 <template>
   <div id="app">
-    <app-header />
+    <AppHeader />
     <div class="app-body">
-      <configuration />
+      <Configuration />
       <div class="workspace">
-        <editor /> <reports :reports="$store.state.eslint.result" />
+        <Editor />
+        <Reports :reports="$store.state.eslint.result" />
       </div>
     </div>
   </div>
@@ -16,7 +17,7 @@ import Configuration from './components/sidebar/Configuration.vue'
 import Reports from './components/Reports.vue'
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     AppHeader,
     Configuration,
@@ -28,7 +29,13 @@ export default {
 
 <style lang="stylus">
 #app
-  font-family -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif
+  font-family
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Helvetica,
+    Arial,
+    sans-serif
   min-height 100vh
 
 .app-body
