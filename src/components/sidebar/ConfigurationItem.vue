@@ -1,6 +1,7 @@
 <template>
   <div class="config-item-container">
     <label class="config-item-header" @click="toggleExpanded">
+      <b>{{ expanded ? '-' : '+' }}</b>
       {{ title }}
     </label>
     <ul v-if="expanded" class="list">
