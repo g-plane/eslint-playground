@@ -8,7 +8,7 @@ const rules = fs
   .map(name => {
     const rule = path.basename(name, '.js')
     return (
-      `'unicorn/${rule}': ` + `require('eslint-plugin-unicorn/rules/${name}')`
+      `'unicorn/${rule}': require('eslint-plugin-unicorn/rules/${name}')`
     )
   })
   .join()

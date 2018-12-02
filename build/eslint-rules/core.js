@@ -7,7 +7,7 @@ const rules = fs
   .filter(name => name.endsWith('.js'))
   .map(name => {
     const rule = path.basename(name, '.js')
-    return `'${rule}': ` + `require('eslint/lib/rules/${name}')`
+    return `'${rule}': require('eslint/lib/rules/${name}')`
   })
   .join()
 
