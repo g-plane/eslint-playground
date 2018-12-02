@@ -16,7 +16,7 @@ And follow steps:
 
 ```bash
 $ yarn
-$ yarn dev    # For development
+$ yarn serve    # For development
 $ yarn build  # For production build
 ```
 
