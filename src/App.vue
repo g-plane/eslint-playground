@@ -27,15 +27,10 @@ export default {
 }
 </script>
 
+<!-- eslint-disable max-len -->
 <style lang="stylus">
 #app
-  font-family
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Helvetica,
-    Arial,
-    sans-serif
+  font-family -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif
   min-height 100vh
 
 .app-body
