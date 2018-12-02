@@ -1,6 +1,6 @@
 {
   "name": "eslint-playground",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "ESLint Playground.",
   "repository": "https://github.com/g-plane/eslint-playground",
   "author": "Pig Fang <g-plane@hotmail.com>",

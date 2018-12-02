@@ -1,27 +1,30 @@
 <script>
-import Linter from 'eslint4b'
-import babelEslint from 'babel-eslint/package.json'
-import typescriptParser from 'typescript-eslint-parser/package.json'
-import vueParser from 'vue-eslint-parser/package.json'
-import pluginPromise from 'eslint-plugin-promise/package.json'
-import pluginReact from 'eslint-plugin-react/package.json'
-import pluginVue from 'eslint-plugin-vue/package.json'
-import pluginUnicorn from 'eslint-plugin-unicorn/package.json'
-import pluginFlowtype from 'eslint-plugin-flowtype/package.json'
-import pluginTypescript from 'eslint-plugin-typescript/package.json'
-
+import pkg from '../../../package.json'
 import ConfigurationItem from './ConfigurationItem.vue'
+
+const deps = pkg.dependencies
 
 export default {
   name: 'Versions',
+  methods: {
+    getVersion(name) {
+      return deps[name].slice(1)
+    }
+  },
   render() {
     return (
       <ConfigurationItem title="Version Info">
         <li>
+          <a href="https://github.com/g-plane/eslint-playground" target="_blank" rel="noopener">
+            eslint-playground
+          </a>
+          v{pkg.version}
+        </li>
+        <li>
           <a href="https://eslint.org" target="_blank" rel="noopener">
             eslint
           </a>
-          v{Linter.version}
+          v{this.getVersion('eslint4b')}
         </li>
         <li>
           <a
@@ -31,7 +34,7 @@ export default {
           >
             babel-eslint
           </a>
-          v{babelEslint.version}
+          v{this.getVersion('babel-eslint')}
         </li>
         <li>
           <a
@@ -41,7 +44,7 @@ export default {
           >
             typescript-eslint-parser
           </a>
-          v{typescriptParser.version}
+          v{this.getVersion('typescript-eslint-parser')}
         </li>
         <li>
           <a
@@ -51,7 +54,7 @@ export default {
           >
             vue-eslint-parser
           </a>
-          v{vueParser.version}
+          v{this.getVersion('vue-eslint-parser')}
         </li>
         <li>
           <a
@@ -61,7 +64,7 @@ export default {
           >
             eslint-plugin-promise
           </a>
-          v{pluginPromise.version}
+          v{this.getVersion('eslint-plugin-promise')}
         </li>
         <li>
           <a
@@ -71,7 +74,7 @@ export default {
           >
             eslint-plugin-react
           </a>
-          v{pluginReact.version}
+          v{this.getVersion('eslint-plugin-react')}
         </li>
         <li>
           <a
@@ -81,7 +84,7 @@ export default {
           >
             eslint-plugin-vue
           </a>
-          v{pluginVue.version}
+          v{this.getVersion('eslint-plugin-vue')}
         </li>
         <li>
           <a
@@ -91,7 +94,7 @@ export default {
           >
             eslint-plugin-unicorn
           </a>
-          v{pluginUnicorn.version}
+          v{this.getVersion('eslint-plugin-unicorn')}
         </li>
         <li>
           <a
@@ -101,7 +104,7 @@ export default {
           >
             eslint-plugin-flowtype
           </a>
-          v{pluginFlowtype.version}
+          v{this.getVersion('eslint-plugin-flowtype')}
         </li>
         <li>
           <a
@@ -111,7 +114,7 @@ export default {
           >
             eslint-plugin-typescript
           </a>
-          v{pluginTypescript.version}
+          v{this.getVersion('eslint-plugin-typescript')}
         </li>
       </ConfigurationItem>
     )
