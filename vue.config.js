@@ -118,7 +118,7 @@ module.exports = {
         }
       ]
     },
-    plugins: [new MonacoWebpackPlugin()],
+    plugins: [new MonacoWebpackPlugin({ languages: ['javascript'] })],
     node: {
       child_process: 'empty', // eslint-disable-line camelcase
       fs: 'empty',
