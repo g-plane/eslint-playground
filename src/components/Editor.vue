@@ -131,11 +131,11 @@ export default {
       state => state.eslint.parser,
       parser => {
         if (parser === 'typescript-eslint-parser') {
-          monaco.editor.setModelLanguage(this.editor.getModel(), 'typescript')
+          monaco.editor.setModelLanguage(model, 'typescript')
         } else if (parser === 'vue-eslint-parser') {
-          monaco.editor.setModelLanguage(this.editor.getModel(), 'html')
+          monaco.editor.setModelLanguage(model, 'html')
         } else {
-          monaco.editor.setModelLanguage(this.editor.getModel(), 'javascript')
+          monaco.editor.setModelLanguage(model, 'javascript')
         }
       }
     )
