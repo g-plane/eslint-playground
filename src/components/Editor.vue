@@ -5,6 +5,7 @@
 <script>
 import * as monaco from 'monaco-editor'
 import * as emitter from '../events'
+import * as state from '../state'
 
 monaco.languages.typescript.javascriptDefaults.setDiagnosticsOptions({
   noSyntaxValidation: true
@@ -44,7 +45,8 @@ export default {
   data() {
     return {
       /** @type {monaco.editor.IStandaloneCodeEditor} */
-      editor: null
+      editor: null,
+      serializedState: location.hash.slice(1)
     }
   },
   mounted() {
@@ -59,9 +61,14 @@ export default {
     })
 
     const model = this.editor.getModel()
-    model.onDidChangeContent(
-      () => this.$store.commit('updateCode', model.getValue())
-    )
+    model.onDidChangeContent(() => {
+      const code = model.getValue()
+      this.$store.commit('updateCode', code)
+
+      const hash = state.serialize({ code })
+      this.serializedState = hash
+      location.replace(`#${hash}`)
+    })
     model.updateOptions({
       insertSpaces: true,
       tabSize: 2
@@ -139,9 +146,25 @@ export default {
         }
       }
     )
+
+    window.addEventListener('hashchange', this.onHashChange)
+
+    const { code } = state.deserialize(this.serializedState)
+    this.editor.setValue(code || this.$store.state.code)
   },
   beforeDestroy() {
     this.editor.dispose()
+    window.removeEventListener('hashchange', this.onHashChange)
+  },
+  methods: {
+    onHashChange() {
+      const fromUrl = location.hash.slice(1)
+      if (fromUrl !== this.serializedState) {
+        const { code } = state.deserialize(fromUrl)
+        this.$store.commit('updateCode', code)
+        this.editor.setValue(code)
+      }
+    }
   }
 }
 </script>

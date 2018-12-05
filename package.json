@@ -21,6 +21,7 @@
     "eslint-plugin-vue": "^5.0.0-beta.5",
     "eslint4b": "^5.9.0",
     "monaco-editor": "^0.15.6",
+    "pako": "^1.0.7",
     "typescript": "^3.2.1",
     "typescript-eslint-parser": "^21.0.1",
     "vue": "^2.5.17",
