@@ -3,6 +3,8 @@ const path = require('path')
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 
 module.exports = {
+  baseUrl: process.env.BUILD_PR ? `/pr/${process.env.BUILD_PR}/` : undefined,
+  outputDir: process.env.BUILD_PR ? `dist/pr/${process.env.BUILD_PR}/` : undefined,
   lintOnSave: false,
   configureWebpack: {
     module: {

@@ -1,9 +1,11 @@
-import Linter from 'eslint4b'
+import Linter from 'eslint4b/dist/linter'
+import coreRules from 'eslint/lib/load-rules'
 import store from './store'
 import * as emitter from './events'
 
 /** @type {import('eslint').Linter} */
 const linter = new Linter()
+linter.defineRules(coreRules())
 store.commit('updateRules', linter.getRules().keys())
 
 export async function switchParser(parserName) {

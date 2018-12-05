@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build && node build/buildForPR",
     "lint": "vue-cli-service lint --format=beauty"
   },
   "dependencies": {
@@ -28,6 +28,7 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@octokit/graphql": "^1.0.0",
     "@types/eslint": "^4.16.4",
     "@vue/cli-plugin-babel": "^3.2.0",
     "@vue/cli-plugin-eslint": "^3.2.0",
@@ -36,6 +37,7 @@
     "eslint": "^5.9.0",
     "eslint-config-gplane": "^3.4.0",
     "eslint-formatter-beauty": "^3.0.0",
+    "execa": "^1.0.0",
     "monaco-editor-webpack-plugin": "^1.7.0",
     "string-replace-loader": "^2.1.1",
     "stylus": "^0.54.5",
