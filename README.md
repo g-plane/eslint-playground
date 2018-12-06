@@ -2,9 +2,11 @@
 
 > Just for fun!
 
-Try it online: [https://g-plane.github.io/eslint-playground/](https://g-plane.github.io/eslint-playground/)
+Try it online: [https://eslint.gplane.win/](https://eslint.gplane.win/)
 
 Note: This app needs ES2015+ environment.
+
+Old version which was written with Preact: [https://g-plane.github.io/eslint-playground/](https://g-plane.github.io/eslint-playground/) (Won't be updated any more.)
 
 ## Development
 
@@ -15,9 +17,9 @@ First use `git clone` to clone this repo.
 And follow steps:
 
 ```bash
-$ yarn
-$ yarn serve    # For development
-$ yarn build  # For production build
+yarn
+yarn serve    # For development
+yarn build    # For production build
 ```
 
 ## Credits
