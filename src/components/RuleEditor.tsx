@@ -1,7 +1,12 @@
 import React, { useRef } from 'react'
 import MonacoEditor from '@monaco-editor/react'
 import type * as monaco from 'monaco-editor'
-import { loadESTree } from '../extraLibs'
+
+const options: monaco.editor.IStandaloneEditorConstructionOptions = {
+  fontSize: 15,
+  lineHeight: 24,
+  fontFamily: '"Cascadia Code", "JetBrains Mono", Monaco, Consolas, monospace',
+}
 
 interface Props {
   onInput(code: string): void
@@ -38,6 +43,7 @@ const RuleEditor: React.FC<Props> = (props) => {
       width="50vw"
       defaultLanguage="javascript"
       defaultPath="file:///main.jsx"
+      options={options}
       onMount={handleEditorDidMount}
       onChange={handleEditorValueChange}
     />
