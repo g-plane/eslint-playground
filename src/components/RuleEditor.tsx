@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import MonacoEditor from '@monaco-editor/react'
 import type * as monaco from 'monaco-editor'
+import { loadESTree, loadESLint } from '../extraLibs'
 
 const options: monaco.editor.IStandaloneEditorConstructionOptions = {
   fontSize: 15,
@@ -28,7 +29,7 @@ const RuleEditor: React.FC<Props> = (props) => {
       renderWhitespace: 'trailing',
     })
 
-    await loadESTree(monacoInstance)
+    await Promise.all([loadESTree(monacoInstance), loadESLint(monacoInstance)])
   }
 
   const handleEditorValueChange = (value: string | undefined) => {
