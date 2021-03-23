@@ -4,6 +4,5 @@
     "target": "esnext",
     "module": "esnext",
     "types": ["vite/client"]
-  },
-  "include": ["src"]
+  }
 }
