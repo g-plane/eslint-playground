@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import MonacoEditor from '@monaco-editor/react'
 import type * as monaco from 'monaco-editor'
-import { defaultMonacoOptions } from '../utils'
+import { defaultMonacoOptions, defaultEditorConfig } from '../utils'
 
 const Wrapper = styled.div`
   height: 100%;

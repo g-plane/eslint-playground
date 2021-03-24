@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import MonacoEditor from '@monaco-editor/react'
 import type * as monaco from 'monaco-editor'
-import { defaultMonacoOptions } from '../utils'
+import { defaultMonacoOptions, defaultEditorConfig } from '../utils'
 import { loadESTree, loadESLint } from '../extraLibs'
 
 interface Props {
