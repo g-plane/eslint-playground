@@ -17,12 +17,7 @@ const RuleEditor: React.FC<Props> = (props) => {
   ) => {
     editorRef.current = editor
 
-    editor.updateOptions({
-      insertSpaces: true,
-      tabSize: 2,
-      trimAutoWhitespace: true,
-      renderWhitespace: 'trailing',
-    })
+    editor.updateOptions(defaultEditorConfig)
 
     await Promise.all([loadESTree(monacoInstance), loadESLint(monacoInstance)])
   }

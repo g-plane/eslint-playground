@@ -15,12 +15,7 @@ const LinterBox: React.FC = () => {
   const handleEditorDidMount = (
     editor: monaco.editor.IStandaloneCodeEditor
   ) => {
-    editor.updateOptions({
-      insertSpaces: true,
-      tabSize: 2,
-      trimAutoWhitespace: true,
-      renderWhitespace: 'trailing',
-    })
+    editor.updateOptions(defaultEditorConfig)
   }
 
   const handleEditorValueChange = (value: string | undefined) => {
