@@ -8,6 +8,7 @@ dependencies:
   styled-components: 5.2.1_5544908854c626bd13d8795d8f0cae8d
 devDependencies:
   '@gplane/tsconfig': 4.2.0
+  '@types/eslint': 7.2.7
   '@types/react': 17.0.3
   '@types/react-dom': 17.0.2
   '@types/styled-components': 5.1.9
@@ -277,6 +278,17 @@ packages:
       react-dom: ^16.8.0 || ^17.0.0
     resolution:
       integrity: sha512-Hh895v/KfGgckDLXq8sdDGT4xS89+2hbQOP1l57sLd2XlJycChdzPiCj02nQDIduLmUIVHittjaj1/xmy94C3A==
+  /@types/eslint/7.2.7:
+    dependencies:
+      '@types/estree': 0.0.46
+      '@types/json-schema': 7.0.7
+    dev: true
+    resolution:
+      integrity: sha512-EHXbc1z2GoQRqHaAT7+grxlTJ3WE2YNeD6jlpPoRc83cCoThRY+NUWjCUZaYmk51OICkPXn2hhphcWcWXgNW0Q==
+  /@types/estree/0.0.46:
+    dev: true
+    resolution:
+      integrity: sha512-laIjwTQaD+5DukBZaygQ79K1Z0jb1bPEMRrkXSLjtCcZm+abyp5YbrqpSLzD42FwWW6gK/aS4NYpJ804nG2brg==
   /@types/hoist-non-react-statics/3.3.1:
     dependencies:
       '@types/react': 17.0.3
@@ -284,6 +296,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==
+  /@types/json-schema/7.0.7:
+    dev: true
+    resolution:
+      integrity: sha512-cxWFQVseBm6O9Gbw1IWb8r6OS4OhSt3hPZLkFApLjM8TEXROBuQGLAH2i2gZpcXdLBIrpXuTDhH7Vbm1iXmNGA==
   /@types/prop-types/15.7.3:
     dev: true
     resolution:
@@ -917,6 +933,7 @@ packages:
 specifiers:
   '@gplane/tsconfig': ^4.2.0
   '@monaco-editor/react': ^4.1.0
+  '@types/eslint': ^7.2.7
   '@types/react': ^17.0.3
   '@types/react-dom': ^17.0.2
   '@types/styled-components': ^5.1.9
