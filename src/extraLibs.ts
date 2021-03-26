@@ -7,6 +7,7 @@ async function fetchLib(url: string): Promise<string> {
 
 function addExtraLib(instance: typeof monaco, code: string, path: string) {
   instance.languages.typescript.javascriptDefaults.addExtraLib(code, path)
+  instance.languages.typescript.typescriptDefaults.addExtraLib(code, path)
 }
 
 export async function loadESTree(instance: typeof monaco) {
