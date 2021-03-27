@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import Header from './components/Header'
 import RuleEditor from './components/RuleEditor'
 import LinterBox from './components/LinterBox'

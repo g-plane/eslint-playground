@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import MonacoEditor from '@monaco-editor/react'
 import type * as monaco from 'monaco-editor'
 import { defaultMonacoOptions, defaultEditorConfig } from '../utils'
