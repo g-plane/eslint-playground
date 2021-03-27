@@ -31,7 +31,7 @@ const RuleEditor: React.FC<Props> = (props) => {
   return (
     <MonacoEditor
       height="100%"
-      width="50vw"
+      width="49vw"
       defaultLanguage="javascript"
       defaultPath="file:///main.jsx"
       options={defaultMonacoOptions}

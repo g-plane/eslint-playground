@@ -6,7 +6,7 @@ import LinterBox from './components/LinterBox'
 
 const Main = styled.main`
   display: flex;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 82px);
 `
 
 const App: React.FC = () => {
