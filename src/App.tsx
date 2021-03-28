@@ -1,24 +1,12 @@
-import React, { useState } from 'react'
-import styled from '@emotion/styled'
+import React from 'react'
 import Header from './components/Header'
-import RuleEditor from './components/RuleEditor'
-import LinterBox from './components/LinterBox'
-
-const Main = styled.main`
-  display: flex;
-  height: calc(100vh - 82px);
-`
+import Workspace from './components/Workspace'
 
 const App: React.FC = () => {
-  const [ruleDefinition, setRuleDefinition] = useState('')
-
   return (
     <>
       <Header />
-      <Main>
-        <RuleEditor onInput={setRuleDefinition} />
-        <LinterBox />
-      </Main>
+      <Workspace />
     </>
   )
 }
