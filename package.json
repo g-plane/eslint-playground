@@ -17,10 +17,12 @@
     "semi": false
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.4.1",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.1.5",
     "@monaco-editor/react": "^4.1.0",
     "eslint4b": "^7.22.0",
+    "framer-motion": "^4.0.3",
     "monaco-editor": "^0.23.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
