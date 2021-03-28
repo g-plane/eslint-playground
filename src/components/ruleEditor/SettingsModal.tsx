@@ -58,7 +58,7 @@ const SettingsModal: React.FC<Props> = (props) => {
         <ModalCloseButton onClick={handleCancel} />
         <ModalBody>
           <FormControl>
-            <FormLabel>Languages</FormLabel>
+            <FormLabel>Language</FormLabel>
             <RadioGroup value={language} onChange={setLanguage}>
               <HStack spacing="24px">
                 <Radio value="javascript">JavaScript</Radio>
