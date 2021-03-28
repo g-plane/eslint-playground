@@ -8,6 +8,7 @@ dependencies:
   monaco-editor: 0.23.0
   react: 17.0.1
   react-dom: 17.0.1_react@17.0.1
+  react-icons: 4.2.0_react@17.0.1
 devDependencies:
   '@gplane/tsconfig': 4.2.0
   '@types/eslint': 7.2.7
@@ -1814,6 +1815,14 @@ packages:
       react: ^16.8.0 || ^17.0.0
     resolution:
       integrity: sha512-XLxj6uTXgz0US8TmqNU2jMfnXwZG0mH2r/afQqvPEaX6nyEll5LHVcEXk2XDUQ34RVeLPkO/xK5x6c/qiuSq/A==
+  /react-icons/4.2.0_react@17.0.1:
+    dependencies:
+      react: 17.0.1
+    dev: false
+    peerDependencies:
+      react: '*'
+    resolution:
+      integrity: sha512-rmzEDFt+AVXRzD7zDE21gcxyBizD/3NqjbX6cmViAgdqfJ2UiLer8927/QhhrXQV7dEj/1EGuOTPp7JnLYVJKQ==
   /react-is/16.13.1:
     dev: false
     resolution:
@@ -2082,5 +2091,6 @@ specifiers:
   prettier: ^2.2.1
   react: ^17.0.1
   react-dom: ^17.0.1
+  react-icons: ^4.2.0
   typescript: ^4.2.3
   vite: ^2.1.2

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Flex } from '@chakra-ui/react'
-import RuleEditor from './RuleEditor'
+import RuleEditor from './ruleEditor/RuleEditor'
 import LinterBox from './LinterBox'
 
 const Workspace: React.FC = () => {
@@ -8,7 +8,7 @@ const Workspace: React.FC = () => {
 
   return (
     <Flex h="calc(100vh - 84px)">
-      <RuleEditor onInput={setRule} />
+      <RuleEditor code={rule} onInput={setRule} />
       <LinterBox />
     </Flex>
   )
