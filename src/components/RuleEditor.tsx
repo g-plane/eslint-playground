@@ -33,7 +33,7 @@ const RuleEditor: React.FC<Props> = (props) => {
       height="100%"
       width="50%"
       defaultLanguage="javascript"
-      defaultPath="file:///main.jsx"
+      defaultPath="file:///rule.jsx"
       options={defaultMonacoOptions}
       onMount={handleEditorDidMount}
       onChange={handleEditorValueChange}

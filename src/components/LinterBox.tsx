@@ -24,7 +24,7 @@ const LinterBox: React.FC = () => {
       <MonacoEditor
         height="80%"
         defaultLanguage="javascript"
-        defaultPath="file:///main.jsx"
+        defaultPath="file:///test-case.jsx"
         options={defaultMonacoOptions}
         onMount={handleEditorDidMount}
         onChange={handleEditorValueChange}
