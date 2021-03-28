@@ -29,3 +29,21 @@ export async function loadESLint(instance: typeof monaco) {
     'file:///node_modules/@types/eslint/index.d.ts'
   )
 }
+
+export async function loadReact(instance: typeof monaco) {
+  addExtraLib(
+    instance,
+    await fetchLib(
+      'https://cdn.jsdelivr.net/npm/@types/react@17.0.3/index.d.ts'
+    ),
+    'file:///node_modules/@types/react/index.d.ts'
+  )
+
+  addExtraLib(
+    instance,
+    await fetchLib(
+      'https://cdn.jsdelivr.net/npm/@types/react@17.0.3/global.d.ts'
+    ),
+    'file:///node_modules/@types/react@17.0.3/global.d.ts'
+  )
+}
