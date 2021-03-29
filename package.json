@@ -10,7 +10,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
-    "fmt": "prettier --write **/*.ts **/*.tsx *.ts"
+    "fmt": "prettier --write src *.ts"
   },
   "prettier": {
     "singleQuote": true,
