@@ -12,4 +12,5 @@ export const defaultEditorConfig: monaco.editor.IEditorOptions &
   tabSize: 2,
   trimAutoWhitespace: true,
   renderWhitespace: 'trailing',
+  minimap: { enabled: false },
 }
