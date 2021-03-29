@@ -7,13 +7,21 @@ interface Props {
 }
 
 const Header: React.FC<Props> = (props) => (
-  <Flex h="56px" bg="brand" alignItems="center" justifyContent="space-between" px="20px">
+  <Flex
+    h="56px"
+    bg="brand"
+    alignItems="center"
+    justifyContent="space-between"
+    px="20px"
+  >
     <Text fontSize="22px" fontWeight="bold" textColor="white">
       ESLint Playground
     </Text>
     <IconButton
-      colorScheme="purple"
-      bgColor="brand"
+      variant="unstyled"
+      color="white"
+      display="flex"
+      placeItems="center"
       icon={<VscSettingsGear />}
       aria-label="Global Settings"
       onClick={props.onOpenGlobalSettings}

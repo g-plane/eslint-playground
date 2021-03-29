@@ -1,8 +1,9 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import {
   Button,
   FormControl,
   FormLabel,
+  HStack,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -10,6 +11,9 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Radio,
+  RadioGroup,
+  useColorMode,
 } from '@chakra-ui/react'
 
 interface Props {
@@ -20,13 +24,20 @@ interface Props {
 const GlobalSettingsModal: React.FC<Props> = (props) => {
   const { isOpen, onClose } = props
 
+  const [colorMode, setColorMode] = useState('light')
   const initialFocusRef = useRef<HTMLButtonElement | null>(null)
+  const {
+    colorMode: originalColorMode,
+    setColorMode: applyColorMode,
+  } = useColorMode()
 
   const handleConfirm = () => {
-    //
+    applyColorMode(colorMode)
+    onClose()
   }
 
   const handleCancel = () => {
+    setColorMode(originalColorMode)
     onClose()
   }
 
@@ -42,7 +53,17 @@ const GlobalSettingsModal: React.FC<Props> = (props) => {
       <ModalContent>
         <ModalHeader>Global Settings</ModalHeader>
         <ModalCloseButton onClick={handleCancel} />
-        <ModalBody></ModalBody>
+        <ModalBody>
+          <FormControl>
+            <FormLabel>Color Mode</FormLabel>
+            <RadioGroup value={colorMode} onChange={setColorMode}>
+              <HStack spacing="24px">
+                <Radio value="light">Light</Radio>
+                <Radio value="dark">Dark</Radio>
+              </HStack>
+            </RadioGroup>
+          </FormControl>
+        </ModalBody>
         <ModalFooter>
           <Button
             colorScheme="blue"

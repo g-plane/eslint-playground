@@ -1,5 +1,12 @@
 import React, { useRef, useState } from 'react'
-import { Box, Flex, IconButton, Text, useDisclosure } from '@chakra-ui/react'
+import {
+  Box,
+  Flex,
+  IconButton,
+  Text,
+  useColorMode,
+  useDisclosure,
+} from '@chakra-ui/react'
 import { VscSettingsGear } from 'react-icons/vsc'
 import MonacoEditor from '@monaco-editor/react'
 import type * as monaco from 'monaco-editor'
@@ -16,6 +23,7 @@ interface Props {
 const RuleEditor: React.FC<Props> = (props) => {
   const [language, setLanguage] = useState('javascript')
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null)
+  const { colorMode } = useColorMode()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const handleEditorDidMount = async (
@@ -51,7 +59,6 @@ const RuleEditor: React.FC<Props> = (props) => {
       <Flex
         px="32px"
         py="8px"
-        bg="gray.200"
         alignItems="center"
         justifyContent="space-between"
       >
@@ -70,6 +77,7 @@ const RuleEditor: React.FC<Props> = (props) => {
         defaultLanguage="javascript"
         path={path}
         defaultPath="file:///rule.jsx"
+        theme={colorMode === 'dark' ? 'vs-dark' : 'light'}
         options={defaultMonacoOptions}
         onMount={handleEditorDidMount}
         onChange={handleEditorValueChange}
