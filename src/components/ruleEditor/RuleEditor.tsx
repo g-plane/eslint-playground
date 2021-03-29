@@ -55,7 +55,7 @@ const RuleEditor: React.FC<Props> = (props) => {
   }
 
   return (
-    <Box w="50%">
+    <Box w="50%" borderRightWidth="thin" borderRightColor="gray.300">
       <Flex
         px="32px"
         py="8px"

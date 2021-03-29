@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Flex } from '@chakra-ui/react'
 import RuleEditor from './ruleEditor/RuleEditor'
-import LinterBox from './LinterBox'
+import LinterBox from './linterBox/LinterBox'
 
 const Workspace: React.FC = () => {
   const [rule, setRule] = useState('')
