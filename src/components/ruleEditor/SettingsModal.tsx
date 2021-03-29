@@ -65,6 +65,9 @@ const SettingsModal: React.FC<Props> = (props) => {
                 <Radio value="typescript">TypeScript</Radio>
               </HStack>
             </RadioGroup>
+            <FormHelperText>
+              Caution: Switching to another language may lose your code.
+            </FormHelperText>
           </FormControl>
         </ModalBody>
         <ModalFooter>
