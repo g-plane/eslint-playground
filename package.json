@@ -26,7 +26,8 @@
     "monaco-editor": "^0.23.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-icons": "^4.2.0"
+    "react-icons": "^4.2.0",
+    "react-use": "^17.2.1"
   },
   "devDependencies": {
     "@gplane/tsconfig": "^4.2.0",

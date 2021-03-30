@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
+import { useAsync } from 'react-use'
 import {
   Box,
   Flex,
@@ -8,23 +9,50 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { VscSettingsGear } from 'react-icons/vsc'
-import MonacoEditor from '@monaco-editor/react'
+import MonacoEditor, { useMonaco } from '@monaco-editor/react'
 import type * as monaco from 'monaco-editor'
-import { defaultMonacoOptions, defaultEditorConfig } from '../../utils'
+import {
+  defaultMonacoOptions,
+  defaultEditorConfig,
+  getRunnableCode,
+} from '../../utils'
 import { loadESTree, loadESLint } from '../../extraLibs'
 import SettingsModal from './SettingsModal'
 import type { Options } from './SettingsModal'
 
 interface Props {
-  code: string
   onInput(code: string): void
 }
 
 const RuleEditor: React.FC<Props> = (props) => {
+  const [code, setCode] = useState('')
   const [language, setLanguage] = useState('javascript')
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null)
   const { colorMode } = useColorMode()
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const monacoInstance = useMonaco()
+
+  const fileExtension = language === 'typescript' ? 'tsx' : 'jsx'
+  const path = `file:///rule.${fileExtension}`
+
+  useEffect(() => {
+    const editor = editorRef.current
+    if (editor) {
+      editor.setValue(code)
+    }
+  }, [language])
+
+  useAsync(async () => {
+    if (monacoInstance) {
+      props.onInput(
+        await getRunnableCode(monacoInstance, {
+          source: code,
+          language,
+          path,
+        })
+      )
+    }
+  }, [code, language])
 
   const handleEditorDidMount = async (
     editor: monaco.editor.IStandaloneCodeEditor,
@@ -39,16 +67,13 @@ const RuleEditor: React.FC<Props> = (props) => {
 
   const handleEditorValueChange = (value: string | undefined) => {
     if (value !== undefined) {
-      props.onInput(value)
+      setCode(value)
     }
   }
 
   const handleSettingsModalConfirm = (options: Options) => {
     setLanguage(options.language)
   }
-
-  const fileExtension = language === 'typescript' ? 'tsx' : 'jsx'
-  const path = `file:///rule.${fileExtension}`
 
   const initialModalOptions: Options = {
     language,
@@ -72,7 +97,8 @@ const RuleEditor: React.FC<Props> = (props) => {
         />
       </Flex>
       <MonacoEditor
-        value={props.code}
+        defaultValue=""
+        value={code}
         language={language}
         defaultLanguage="javascript"
         path={path}
