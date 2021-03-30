@@ -4,6 +4,6 @@
     "target": "esnext",
     "module": "esnext",
     "noEmit": true,
-    "types": ["vite/client"]
+    "types": ["vite/client", "node"]
   }
 }
