@@ -80,12 +80,14 @@ const RuleEditor: React.FC<Props> = (props) => {
   }
 
   return (
-    <Box w="50%" borderRightWidth="thin" borderRightColor="gray.300">
+    <Box w="50%">
       <Flex
         px="32px"
         py="8px"
         alignItems="center"
         justifyContent="space-between"
+        borderRightWidth="thin"
+        borderRightColor="gray.300"
       >
         <Text fontSize="18px">Rule Definition</Text>
         <IconButton
@@ -96,18 +98,24 @@ const RuleEditor: React.FC<Props> = (props) => {
           onClick={onOpen}
         />
       </Flex>
-      <MonacoEditor
-        defaultValue=""
-        value={code}
-        language={language}
-        defaultLanguage="javascript"
-        path={path}
-        defaultPath="file:///rule.jsx"
-        theme={colorMode === 'dark' ? 'vs-dark' : 'light'}
-        options={defaultMonacoOptions}
-        onMount={handleEditorDidMount}
-        onChange={handleEditorValueChange}
-      />
+      <Box
+        h="calc(100vh - 132px)"
+        borderRightWidth="thin"
+        borderRightColor="gray.300"
+      >
+        <MonacoEditor
+          defaultValue=""
+          value={code}
+          language={language}
+          defaultLanguage="javascript"
+          path={path}
+          defaultPath="file:///rule.jsx"
+          theme={colorMode === 'dark' ? 'vs-dark' : 'light'}
+          options={defaultMonacoOptions}
+          onMount={handleEditorDidMount}
+          onChange={handleEditorValueChange}
+        />
+      </Box>
       <SettingsModal
         isOpen={isOpen}
         initialOptions={initialModalOptions}
