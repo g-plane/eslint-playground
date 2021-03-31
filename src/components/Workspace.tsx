@@ -9,7 +9,7 @@ const Workspace: React.FC = () => {
   return (
     <Flex h="calc(100vh - 84px)">
       <RuleEditor onInput={setRule} />
-      <LinterBox />
+      <LinterBox ruleSource={rule} />
     </Flex>
   )
 }
