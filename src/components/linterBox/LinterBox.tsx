@@ -31,6 +31,8 @@ const LinterBox: React.FC<Props> = (props) => {
 
   const linter = getLinter(linterRef)
 
+  useEffect(() => setMessages(lint(linter, code)), [code])
+
   useDebounce(
     async () => {
       try {
@@ -68,8 +70,6 @@ const LinterBox: React.FC<Props> = (props) => {
       setCode(value)
     }
   }
-
-  useEffect(() => setMessages(lint(linter, code)), [code])
 
   return (
     <Box w="50%">
