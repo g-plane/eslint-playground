@@ -3,10 +3,10 @@ import { useDebounce } from 'react-use'
 import Linter from 'eslint4b'
 import type { Rule } from 'eslint4b'
 import { Box, Flex, Text, useColorMode } from '@chakra-ui/react'
-import MonacoEditor from '@monaco-editor/react'
+import MonacoEditor, { useMonaco } from '@monaco-editor/react'
 import type * as monaco from 'monaco-editor'
 import { defaultMonacoOptions, defaultEditorConfig } from '../../utils'
-import { executeCode, lint } from './utils'
+import { executeCode, lint, convertLintMessagesToEditorMarkers } from './utils'
 import MessagesPanel from './MessagesPanel'
 
 function getLinter(ref: React.MutableRefObject<Linter | null>): Linter {
@@ -28,11 +28,20 @@ const LinterBox: React.FC<Props> = (props) => {
   const [messages, setMessages] = useState<Linter.LintMessage[]>([])
   const linterRef = useRef<Linter | null>(null)
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null)
+  const monacoInstance = useMonaco()
   const { colorMode } = useColorMode()
 
   const linter = getLinter(linterRef)
 
   useEffect(() => setMessages(lint(linter, code)), [code])
+
+  useEffect(() => {
+    const model = editorRef.current?.getModel()
+    if (model) {
+      const markers = convertLintMessagesToEditorMarkers(messages)
+      monacoInstance?.editor.setModelMarkers(model, 'eslint', markers)
+    }
+  }, [messages])
 
   useDebounce(
     async () => {
@@ -63,6 +72,7 @@ const LinterBox: React.FC<Props> = (props) => {
   const handleEditorDidMount = (
     editor: monaco.editor.IStandaloneCodeEditor
   ) => {
+    editorRef.current = editor
     editor.updateOptions(defaultEditorConfig)
   }
 
