@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, Icon, Text } from '@chakra-ui/react'
+import { Box, Flex, Icon, Text, useColorModeValue } from '@chakra-ui/react'
 import { VscError, VscWarning } from 'react-icons/vsc'
 import type { Linter } from 'eslint4b'
 
@@ -8,6 +8,9 @@ interface Props {
 }
 
 const MessagesPanel: React.FC<Props> = (props) => {
+  const bgColor = useColorModeValue('gray.700', 'gray.200')
+  const hoverBgColor = useColorModeValue('gray.200', 'gray.700')
+
   return (
     <Box
       h="22vh"
@@ -23,13 +26,17 @@ const MessagesPanel: React.FC<Props> = (props) => {
           borderBottomWidth="1px"
           borderBottomColor="gray.200"
           alignItems="center"
+          cursor="pointer"
+          _hover={{ bgColor: hoverBgColor }}
         >
           {message.severity === 1 ? (
             <Icon as={VscWarning} color="yellow.500" mr="8px" />
           ) : (
             <Icon as={VscError} color="red.500" mr="8px" />
           )}
-          <Text mr="3px">{message.message}</Text>
+          <Text color={bgColor} mr="3px">
+            {message.message}
+          </Text>
           {message.ruleId && (
             <Text color="gray.600" mr="3px">
               ({message.ruleId})
