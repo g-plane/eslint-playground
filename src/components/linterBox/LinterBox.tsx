@@ -27,6 +27,7 @@ const LinterBox: React.FC<Props> = (props) => {
   const [code, setCode] = useState('')
   const [messages, setMessages] = useState<Linter.LintMessage[]>([])
   const linterRef = useRef<Linter | null>(null)
+  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null)
   const { colorMode } = useColorMode()
 
   const linter = getLinter(linterRef)
@@ -71,6 +72,17 @@ const LinterBox: React.FC<Props> = (props) => {
     }
   }
 
+  const handleMessageClick = (message: Linter.LintMessage) => {
+    const editor = editorRef.current
+    if (editor) {
+      editor.setPosition({
+        lineNumber: message.line,
+        column: message.column,
+      })
+      editor.focus()
+    }
+  }
+
   return (
     <Box w="50%">
       <Flex
@@ -91,7 +103,7 @@ const LinterBox: React.FC<Props> = (props) => {
           onChange={handleEditorValueChange}
         />
       </Box>
-      <MessagesPanel messages={messages} />
+      <MessagesPanel messages={messages} onMessageClick={handleMessageClick} />
     </Box>
   )
 }

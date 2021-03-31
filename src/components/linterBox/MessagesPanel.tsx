@@ -5,6 +5,7 @@ import type { Linter } from 'eslint4b'
 
 interface Props {
   messages: Linter.LintMessage[]
+  onMessageClick(message: Linter.LintMessage): void
 }
 
 const MessagesPanel: React.FC<Props> = (props) => {
@@ -28,6 +29,7 @@ const MessagesPanel: React.FC<Props> = (props) => {
           alignItems="center"
           cursor="pointer"
           _hover={{ bgColor: hoverBgColor }}
+          onClick={() => props.onMessageClick(message)}
         >
           {message.severity === 1 ? (
             <Icon as={VscWarning} color="yellow.500" mr="8px" />
