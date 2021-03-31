@@ -8,6 +8,9 @@ const theme = extendTheme({
   colors: {
     brand: '#4B32C3',
   },
+  fonts: {
+    body: 'Inter',
+  },
 })
 
 const App: React.FC = () => {
