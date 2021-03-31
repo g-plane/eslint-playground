@@ -7,6 +7,7 @@ import MonacoEditor from '@monaco-editor/react'
 import type * as monaco from 'monaco-editor'
 import { defaultMonacoOptions, defaultEditorConfig } from '../../utils'
 import { executeCode, lint } from './utils'
+import MessagesPanel from './MessagesPanel'
 
 function getLinter(ref: React.MutableRefObject<Linter | null>): Linter {
   if (!ref.current) {
@@ -80,14 +81,17 @@ const LinterBox: React.FC<Props> = (props) => {
       >
         <Text fontSize="18px">Test Case</Text>
       </Flex>
-      <MonacoEditor
-        defaultLanguage="javascript"
-        defaultPath="file:///test-case.jsx"
-        theme={colorMode === 'dark' ? 'vs-dark' : 'light'}
-        options={defaultMonacoOptions}
-        onMount={handleEditorDidMount}
-        onChange={handleEditorValueChange}
-      />
+      <Box h="calc(80vh - 132px)">
+        <MonacoEditor
+          defaultLanguage="javascript"
+          defaultPath="file:///test-case.jsx"
+          theme={colorMode === 'dark' ? 'vs-dark' : 'light'}
+          options={defaultMonacoOptions}
+          onMount={handleEditorDidMount}
+          onChange={handleEditorValueChange}
+        />
+      </Box>
+      <MessagesPanel messages={messages} />
     </Box>
   )
 }
