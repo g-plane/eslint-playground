@@ -3,6 +3,13 @@ import { Box, Flex, Icon, Text, useColorModeValue } from '@chakra-ui/react'
 import { VscError, VscWarning } from 'react-icons/vsc'
 import type { Linter } from 'eslint4b'
 
+function computeKey(message: Linter.LintMessage): string {
+  const line = message.line ?? 1
+  const column = message.column ?? 1
+  const ruleId = message.ruleId ?? ''
+  return `${ruleId}-${line}-${column}`
+}
+
 interface Props {
   messages: Linter.LintMessage[]
   onMessageClick(message: Linter.LintMessage): void
@@ -22,6 +29,7 @@ const MessagesPanel: React.FC<Props> = (props) => {
     >
       {props.messages.map((message) => (
         <Flex
+          key={computeKey(message)}
           px="10px"
           py="5px"
           borderBottomWidth="1px"
