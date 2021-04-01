@@ -4,7 +4,7 @@ on: push
 
 jobs:
   deploy:
-    name: Test
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
@@ -14,11 +14,18 @@ jobs:
       with:
         version: 5.18.9
         run_install: true
-    - name: Install Netlify CLI
-      run: pnpm add -g netlify
     - name: Build
       run: pnpm run build
     - name: Deploy to Netlify
-      run: netlify deploy --prod --dir dist
+      uses: nwtgck/actions-netlify@v1.1
+      with:
+        publish-dir: './dist'
+        production-branch: main
+        production-deploy: true
+        deploy-message: "Deploy from GitHub Actions"
+        enable-pull-request-comment: false
+        enable-commit-comment: false
+        enable-commit-status: false
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
