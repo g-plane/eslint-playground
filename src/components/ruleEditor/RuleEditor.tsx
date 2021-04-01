@@ -17,6 +17,7 @@ import {
   getRunnableCode,
 } from '../../utils'
 import { loadESTree, loadESLint } from '../../extraLibs'
+import { defaultRuleInJS, defaultRuleInTS } from './snippets'
 import SettingsModal from './SettingsModal'
 import type { Options } from './SettingsModal'
 
@@ -25,7 +26,7 @@ interface Props {
 }
 
 const RuleEditor: React.FC<Props> = (props) => {
-  const [code, setCode] = useState('')
+  const [code, setCode] = useState(defaultRuleInJS)
   const [language, setLanguage] = useState('javascript')
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null)
   const { colorMode } = useColorMode()
@@ -38,7 +39,13 @@ const RuleEditor: React.FC<Props> = (props) => {
   useEffect(() => {
     const editor = editorRef.current
     if (editor) {
-      editor.setValue(code)
+      if (language === 'typescript' && code === defaultRuleInJS) {
+        editor.setValue(defaultRuleInTS)
+      } else if (language === 'javascript' && code === defaultRuleInTS) {
+        editor.setValue(defaultRuleInJS)
+      } else {
+        editor.setValue(code)
+      }
     }
   }, [language])
 
@@ -104,7 +111,6 @@ const RuleEditor: React.FC<Props> = (props) => {
         borderRightColor="gray.300"
       >
         <MonacoEditor
-          defaultValue=""
           value={code}
           language={language}
           defaultLanguage="javascript"
