@@ -24,6 +24,7 @@ const App: React.FC = () => {
     fontFamily: 'JetBrains Mono',
     fontLigatures: true,
     fontSize: 16,
+    lineHeight: 24,
   })
   const globalSettingsModal = useDisclosure()
 

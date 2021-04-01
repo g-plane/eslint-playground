@@ -81,6 +81,15 @@ const GlobalSettingsModal: React.FC<Props> = (props) => {
     }))
   }
 
+  const handleLineHeightChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setEditorOptions((options) => ({
+      ...options,
+      lineHeight: Number.parseFloat(event.target.value) || undefined,
+    }))
+  }
+
   return (
     <Modal
       isOpen={isOpen}
@@ -130,6 +139,13 @@ const GlobalSettingsModal: React.FC<Props> = (props) => {
               <Input
                 value={editorOptions.fontSize}
                 onChange={handleFontSizeChange}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Line Height</FormLabel>
+              <Input
+                value={editorOptions.lineHeight}
+                onChange={handleLineHeightChange}
               />
             </FormControl>
           </VStack>
