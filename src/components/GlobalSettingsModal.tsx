@@ -14,10 +14,12 @@ import {
   Radio,
   RadioGroup,
   Select,
+  Spinner,
   VStack,
   useColorMode,
 } from '@chakra-ui/react'
 import { FontFamilyContext } from '../context'
+import { loadFont } from '../utils/fonts'
 
 interface Props {
   isOpen: boolean
@@ -28,6 +30,7 @@ interface Props {
 const GlobalSettingsModal: React.FC<Props> = (props) => {
   const { isOpen, onClose } = props
 
+  const [isLoading, setIsLoading] = useState(false)
   const originalFontFamily = useContext(FontFamilyContext)
   const [colorMode, setColorMode] = useState('light')
   const [fontFamily, setFontFamily] = useState(originalFontFamily)
@@ -37,15 +40,26 @@ const GlobalSettingsModal: React.FC<Props> = (props) => {
     setColorMode: applyColorMode,
   } = useColorMode()
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     applyColorMode(colorMode)
-    props.onFontFamilyChange(fontFamily)
+
+    try {
+      setIsLoading(true)
+      await loadFont(fontFamily)
+      props.onFontFamilyChange(fontFamily)
+    } catch {
+      setFontFamily(originalFontFamily)
+    } finally {
+      setIsLoading(false)
+    }
+
     onClose()
   }
 
   const handleCancel = () => {
     setColorMode(originalColorMode)
     setFontFamily(originalFontFamily)
+    setIsLoading(false)
     onClose()
   }
 
@@ -80,11 +94,23 @@ const GlobalSettingsModal: React.FC<Props> = (props) => {
             </FormControl>
             <FormControl>
               <FormLabel>Font Family</FormLabel>
-              <Select value={fontFamily} onChange={handleFontFamilyChange}>
+              <Select
+                size="sm"
+                value={fontFamily}
+                onChange={handleFontFamilyChange}
+              >
                 <option value="Cascadia Code">Cascadia Code</option>
                 <option value="Consolas">Consolas</option>
+                <option value="Fira Code">Fira Code</option>
+                <option value="Inconsolata">Inconsolata</option>
                 <option value="JetBrains Mono">JetBrains Mono</option>
                 <option value="Monaco">Monaco</option>
+                <option value="Mononoki">Mononoki</option>
+                <option value="PT Mono">PT Mono</option>
+                <option value="Roboto Mono">Roboto Mono</option>
+                <option value="SF Mono">SF Mono</option>
+                <option value="Source Code Pro">Source Code Pro</option>
+                <option value="Victor Mono">Victor Mono</option>
               </Select>
             </FormControl>
           </VStack>
@@ -93,10 +119,11 @@ const GlobalSettingsModal: React.FC<Props> = (props) => {
           <Button
             colorScheme="blue"
             mr={3}
+            disabled={isLoading}
             ref={initialFocusRef}
             onClick={handleConfirm}
           >
-            OK
+            {isLoading ? <Spinner /> : 'OK'}
           </Button>
           <Button onClick={handleCancel}>Close</Button>
         </ModalFooter>
