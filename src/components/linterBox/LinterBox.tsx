@@ -54,7 +54,7 @@ const LinterBox: React.FC<Props> = (props) => {
         const { default: rule } = await executeCode<{
           default: Rule.RuleModule
         }>(ruleSource)
-        linter.defineRule('playground', rule)
+        linter.defineRule('playground/playground', rule)
 
         setMessages(lint(linter, code))
       } catch (error) {

@@ -17,7 +17,7 @@ export function lint(linter: Linter, code: string): Linter.LintMessage[] {
     code,
     {
       parserOptions: { ecmaVersion: 2020, ecmaFeatures: { jsx: true } },
-      rules: { playground: 'error' },
+      rules: { 'playground/playground': 'error' },
     },
     { filename: 'test-case.jsx' }
   )
