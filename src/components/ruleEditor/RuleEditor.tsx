@@ -11,13 +11,10 @@ import {
 import { VscSettingsGear } from 'react-icons/vsc'
 import MonacoEditor, { useMonaco } from '@monaco-editor/react'
 import type * as monaco from 'monaco-editor'
-import {
-  defaultMonacoOptions,
-  defaultEditorConfig,
-  getRunnableCode,
-} from '../../utils'
+import { defaultMonacoOptions, defaultEditorConfig } from '../../utils'
 import { loadESTree, loadESLint } from '../../extraLibs'
 import { useFontFamily } from '../../hooks'
+import { getRunnableCode } from './utils'
 import { defaultRuleInJS, defaultRuleInTS } from './snippets'
 import SettingsModal from './SettingsModal'
 import type { Options } from './SettingsModal'
