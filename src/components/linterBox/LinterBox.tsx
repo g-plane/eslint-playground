@@ -113,7 +113,7 @@ const LinterBox: React.FC<Props> = (props) => {
       >
         <Text fontSize="18px">Test Case</Text>
       </Flex>
-      <Box h="calc(80vh - 132px)">
+      <Box h="calc(80vh - 140px)">
         <MonacoEditor
           defaultLanguage="javascript"
           defaultPath="file:///test-case.jsx"

@@ -105,7 +105,7 @@ const RuleEditor: React.FC<Props> = (props) => {
         />
       </Flex>
       <Box
-        h="calc(100vh - 132px)"
+        h="calc(100vh - 140px)"
         borderRightWidth="thin"
         borderRightColor="gray.300"
       >

@@ -4,6 +4,7 @@ import { FontFamilyContext } from './context'
 import Header from './components/Header'
 import Workspace from './components/Workspace'
 import GlobalSettingsModal from './components/GlobalSettingsModal'
+import Footer from './components/Footer'
 
 const theme = extendTheme({
   colors: {
@@ -29,6 +30,7 @@ const App: React.FC = () => {
           onFontFamilyChange={setFontFamily}
         />
       </FontFamilyContext.Provider>
+      <Footer />
     </ChakraProvider>
   )
 }
