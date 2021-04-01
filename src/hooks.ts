@@ -10,7 +10,8 @@ export function useEditorOptions(
 
   useEffect(() => {
     ref.current?.updateOptions({
+      ...editorOptions,
       fontFamily: `"${editorOptions.fontFamily}", monospace`,
     })
-  }, [editorOptions.fontFamily])
+  }, [editorOptions])
 }

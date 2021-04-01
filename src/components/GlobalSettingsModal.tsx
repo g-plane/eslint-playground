@@ -4,6 +4,7 @@ import {
   FormControl,
   FormLabel,
   HStack,
+  Input,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -73,6 +74,13 @@ const GlobalSettingsModal: React.FC<Props> = (props) => {
     }))
   }
 
+  const handleFontSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEditorOptions((options) => ({
+      ...options,
+      fontSize: Number.parseFloat(event.target.value) || undefined,
+    }))
+  }
+
   return (
     <Modal
       isOpen={isOpen}
@@ -116,6 +124,13 @@ const GlobalSettingsModal: React.FC<Props> = (props) => {
                 <option value="Source Code Pro">Source Code Pro</option>
                 <option value="Victor Mono">Victor Mono</option>
               </Select>
+            </FormControl>
+            <FormControl>
+              <FormLabel>Font Size</FormLabel>
+              <Input
+                value={editorOptions.fontSize}
+                onChange={handleFontSizeChange}
+              />
             </FormControl>
           </VStack>
         </ModalBody>

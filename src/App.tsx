@@ -23,6 +23,7 @@ const App: React.FC = () => {
   ] = useState<monaco.editor.IEditorOptions>({
     fontFamily: 'JetBrains Mono',
     fontLigatures: true,
+    fontSize: 16,
   })
   const globalSettingsModal = useDisclosure()
 
