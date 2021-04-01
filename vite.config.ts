@@ -3,7 +3,7 @@ import reactRefresh from '@vitejs/plugin-react-refresh'
 
 export default defineConfig({
   define: {
-    global: 'globalThis'
+    global: 'globalThis',
   },
   resolve: {
     alias: {
