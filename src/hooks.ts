@@ -9,6 +9,6 @@ export function useFontFamily(
   const fontFamily = useContext(FontFamilyContext)
 
   useEffect(() => {
-    ref.current?.updateOptions({ fontFamily })
+    ref.current?.updateOptions({ fontFamily: `"${fontFamily}", monospace` })
   }, [fontFamily])
 }
