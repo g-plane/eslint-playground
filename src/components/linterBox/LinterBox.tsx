@@ -6,7 +6,12 @@ import { Box, Flex, Text, useColorMode } from '@chakra-ui/react'
 import MonacoEditor, { useMonaco } from '@monaco-editor/react'
 import type * as monaco from 'monaco-editor'
 import { defaultMonacoOptions, defaultEditorConfig } from '../../utils'
-import { executeCode, lint, convertLintMessagesToEditorMarkers } from './utils'
+import {
+  executeCode,
+  lint,
+  convertLintMessagesToEditorMarkers,
+  registerCodeActionProvider,
+} from './utils'
 import MessagesPanel from './MessagesPanel'
 
 function getLinter(ref: React.MutableRefObject<Linter | null>): Linter {
@@ -70,10 +75,13 @@ const LinterBox: React.FC<Props> = (props) => {
   )
 
   const handleEditorDidMount = (
-    editor: monaco.editor.IStandaloneCodeEditor
+    editor: monaco.editor.IStandaloneCodeEditor,
+    monacoInstance: typeof monaco
   ) => {
     editorRef.current = editor
     editor.updateOptions(defaultEditorConfig)
+
+    registerCodeActionProvider(monacoInstance)
   }
 
   const handleEditorValueChange = (value: string | undefined) => {
