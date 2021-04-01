@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { ChakraProvider, extendTheme, useDisclosure } from '@chakra-ui/react'
-import { FontFamilyContext } from './context'
+import type * as monaco from 'monaco-editor'
+import { EditorOptionsContext } from './context'
 import Header from './components/Header'
 import Workspace from './components/Workspace'
 import GlobalSettingsModal from './components/GlobalSettingsModal'
@@ -16,20 +17,26 @@ const theme = extendTheme({
 })
 
 const App: React.FC = () => {
-  const [fontFamily, setFontFamily] = useState('JetBrains Mono')
+  const [
+    editorOptions,
+    setEditorOptions,
+  ] = useState<monaco.editor.IEditorOptions>({
+    fontFamily: 'JetBrains Mono',
+    fontLigatures: true,
+  })
   const globalSettingsModal = useDisclosure()
 
   return (
     <ChakraProvider theme={theme}>
-      <FontFamilyContext.Provider value={fontFamily}>
+      <EditorOptionsContext.Provider value={editorOptions}>
         <Header onOpenGlobalSettings={globalSettingsModal.onOpen} />
         <Workspace />
         <GlobalSettingsModal
           isOpen={globalSettingsModal.isOpen}
           onClose={globalSettingsModal.onClose}
-          onFontFamilyChange={setFontFamily}
+          onEditorOptionsChange={setEditorOptions}
         />
-      </FontFamilyContext.Provider>
+      </EditorOptionsContext.Provider>
       <Footer />
     </ChakraProvider>
   )

@@ -1,14 +1,16 @@
 import { useEffect, useContext } from 'react'
 import type { MutableRefObject } from 'react'
 import type * as monaco from 'monaco-editor'
-import { FontFamilyContext } from './context'
+import { EditorOptionsContext } from './context'
 
-export function useFontFamily(
+export function useEditorOptions(
   ref: MutableRefObject<monaco.editor.IStandaloneCodeEditor | null>
 ): void {
-  const fontFamily = useContext(FontFamilyContext)
+  const editorOptions = useContext(EditorOptionsContext)
 
   useEffect(() => {
-    ref.current?.updateOptions({ fontFamily: `"${fontFamily}", monospace` })
-  }, [fontFamily])
+    ref.current?.updateOptions({
+      fontFamily: `"${editorOptions.fontFamily}", monospace`,
+    })
+  }, [editorOptions.fontFamily])
 }

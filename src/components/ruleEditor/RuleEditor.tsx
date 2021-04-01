@@ -13,7 +13,7 @@ import MonacoEditor, { useMonaco } from '@monaco-editor/react'
 import type * as monaco from 'monaco-editor'
 import { defaultMonacoOptions, defaultEditorConfig } from '../../utils'
 import { loadESTree, loadESLint } from '../../extraLibs'
-import { useFontFamily } from '../../hooks'
+import { useEditorOptions } from '../../hooks'
 import { getRunnableCode } from './utils'
 import { defaultRuleInJS, defaultRuleInTS } from './snippets'
 import SettingsModal from './SettingsModal'
@@ -30,7 +30,7 @@ const RuleEditor: React.FC<Props> = (props) => {
   const { colorMode } = useColorMode()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const monacoInstance = useMonaco()
-  useFontFamily(editorRef)
+  useEditorOptions(editorRef)
 
   const fileExtension = language === 'typescript' ? 'tsx' : 'jsx'
   const path = `file:///rule.${fileExtension}`

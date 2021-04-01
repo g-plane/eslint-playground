@@ -18,22 +18,23 @@ import {
   VStack,
   useColorMode,
 } from '@chakra-ui/react'
-import { FontFamilyContext } from '../context'
+import type * as monaco from 'monaco-editor'
+import { EditorOptionsContext } from '../context'
 import { loadFont } from '../utils/fonts'
 
 interface Props {
   isOpen: boolean
   onClose(): void
-  onFontFamilyChange(fontFamily: string): void
+  onEditorOptionsChange(options: monaco.editor.IEditorOptions): void
 }
 
 const GlobalSettingsModal: React.FC<Props> = (props) => {
   const { isOpen, onClose } = props
 
   const [isLoading, setIsLoading] = useState(false)
-  const originalFontFamily = useContext(FontFamilyContext)
+  const originalEditorOptions = useContext(EditorOptionsContext)
   const [colorMode, setColorMode] = useState('light')
-  const [fontFamily, setFontFamily] = useState(originalFontFamily)
+  const [editorOptions, setEditorOptions] = useState(originalEditorOptions)
   const initialFocusRef = useRef<HTMLButtonElement | null>(null)
   const {
     colorMode: originalColorMode,
@@ -45,10 +46,10 @@ const GlobalSettingsModal: React.FC<Props> = (props) => {
 
     try {
       setIsLoading(true)
-      await loadFont(fontFamily)
-      props.onFontFamilyChange(fontFamily)
+      await loadFont(editorOptions.fontFamily!)
+      props.onEditorOptionsChange(editorOptions)
     } catch {
-      setFontFamily(originalFontFamily)
+      setEditorOptions(originalEditorOptions)
     } finally {
       setIsLoading(false)
     }
@@ -58,7 +59,7 @@ const GlobalSettingsModal: React.FC<Props> = (props) => {
 
   const handleCancel = () => {
     setColorMode(originalColorMode)
-    setFontFamily(originalFontFamily)
+    setEditorOptions(originalEditorOptions)
     setIsLoading(false)
     onClose()
   }
@@ -66,7 +67,10 @@ const GlobalSettingsModal: React.FC<Props> = (props) => {
   const handleFontFamilyChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setFontFamily(event.target.value)
+    setEditorOptions((options) => ({
+      ...options,
+      fontFamily: event.target.value,
+    }))
   }
 
   return (
@@ -96,7 +100,7 @@ const GlobalSettingsModal: React.FC<Props> = (props) => {
               <FormLabel>Font Family</FormLabel>
               <Select
                 size="sm"
-                value={fontFamily}
+                value={editorOptions.fontFamily}
                 onChange={handleFontFamilyChange}
               >
                 <option value="Cascadia Code">Cascadia Code</option>

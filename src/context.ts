@@ -1,4 +1,10 @@
 import * as React from 'react'
+import type * as monaco from 'monaco-editor'
 
-export const FontFamilyContext = React.createContext('JetBrains Mono')
-FontFamilyContext.displayName = 'FontFamilyContext'
+export const EditorOptionsContext = React.createContext<monaco.editor.IEditorOptions>(
+  {
+    fontFamily: 'JetBrains Mono',
+    fontLigatures: true,
+  }
+)
+EditorOptionsContext.displayName = 'EditorOptionsContext'

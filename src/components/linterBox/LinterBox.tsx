@@ -5,7 +5,7 @@ import type { Rule } from 'eslint4b'
 import { Box, Flex, Text, useColorMode } from '@chakra-ui/react'
 import MonacoEditor, { useMonaco } from '@monaco-editor/react'
 import type * as monaco from 'monaco-editor'
-import { useFontFamily } from '../../hooks'
+import { useEditorOptions } from '../../hooks'
 import { defaultMonacoOptions, defaultEditorConfig } from '../../utils'
 import {
   executeCode,
@@ -36,7 +36,7 @@ const LinterBox: React.FC<Props> = (props) => {
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null)
   const monacoInstance = useMonaco()
   const { colorMode } = useColorMode()
-  useFontFamily(editorRef)
+  useEditorOptions(editorRef)
 
   const linter = getLinter(linterRef)
 
