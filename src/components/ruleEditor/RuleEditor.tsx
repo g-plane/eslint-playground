@@ -17,6 +17,7 @@ import {
   getRunnableCode,
 } from '../../utils'
 import { loadESTree, loadESLint } from '../../extraLibs'
+import { useFontFamily } from '../../hooks'
 import { defaultRuleInJS, defaultRuleInTS } from './snippets'
 import SettingsModal from './SettingsModal'
 import type { Options } from './SettingsModal'
@@ -32,6 +33,7 @@ const RuleEditor: React.FC<Props> = (props) => {
   const { colorMode } = useColorMode()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const monacoInstance = useMonaco()
+  useFontFamily(editorRef)
 
   const fileExtension = language === 'typescript' ? 'tsx' : 'jsx'
   const path = `file:///rule.${fileExtension}`
