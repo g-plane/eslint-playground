@@ -1,10 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import { useDebounce } from 'react-use'
 import Linter from 'eslint4b'
 import type { Rule } from 'eslint4b'
 import { Box, Flex, Text, useColorMode } from '@chakra-ui/react'
 import MonacoEditor, { useMonaco } from '@monaco-editor/react'
 import type * as monaco from 'monaco-editor'
+import { PrettierOptionsContext } from '../../context'
 import { useEditorOptions } from '../../hooks'
 import { defaultMonacoOptions, defaultEditorConfig } from '../../utils'
 import { registerFormattingProvider } from '../../utils/prettier'
@@ -35,6 +36,7 @@ const LinterBox: React.FC<Props> = (props) => {
   const [messages, setMessages] = useState<Linter.LintMessage[]>([])
   const linterRef = useRef<Linter | null>(null)
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null)
+  const prettierOptions = useContext(PrettierOptionsContext)
   const monacoInstance = useMonaco()
   const { colorMode } = useColorMode()
   useEditorOptions(editorRef)
@@ -61,11 +63,14 @@ const LinterBox: React.FC<Props> = (props) => {
 
   useEffect(() => {
     if (monacoInstance) {
-      const disposable = registerFormattingProvider(monacoInstance)
+      const disposable = registerFormattingProvider(
+        monacoInstance,
+        prettierOptions
+      )
 
       return disposable
     }
-  }, [monacoInstance])
+  }, [monacoInstance, prettierOptions])
 
   useDebounce(
     async () => {

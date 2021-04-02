@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, useContext } from 'react'
 import { useAsync } from 'react-use'
 import {
   Box,
@@ -11,6 +11,7 @@ import {
 import { VscSettingsGear } from 'react-icons/vsc'
 import MonacoEditor, { useMonaco } from '@monaco-editor/react'
 import type * as monaco from 'monaco-editor'
+import { PrettierOptionsContext } from '../../context'
 import { defaultMonacoOptions, defaultEditorConfig } from '../../utils'
 import { registerFormattingProvider } from '../../utils/prettier'
 import { loadESTree, loadESLint } from '../../extraLibs'
@@ -28,6 +29,7 @@ const RuleEditor: React.FC<Props> = (props) => {
   const [code, setCode] = useState(defaultRuleInJS)
   const [language, setLanguage] = useState('javascript')
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null)
+  const prettierOptions = useContext(PrettierOptionsContext)
   const { colorMode } = useColorMode()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const monacoInstance = useMonaco()
@@ -51,11 +53,14 @@ const RuleEditor: React.FC<Props> = (props) => {
 
   useEffect(() => {
     if (monacoInstance) {
-      const disposable = registerFormattingProvider(monacoInstance)
+      const disposable = registerFormattingProvider(
+        monacoInstance,
+        prettierOptions
+      )
 
       return disposable
     }
-  }, [monacoInstance])
+  }, [monacoInstance, prettierOptions])
 
   useAsync(async () => {
     if (monacoInstance) {

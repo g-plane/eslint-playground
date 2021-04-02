@@ -1,6 +1,7 @@
 import React, { useRef, useState, useContext } from 'react'
 import {
   Button,
+  Checkbox,
   FormControl,
   FormLabel,
   HStack,
@@ -12,6 +13,11 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
   Radio,
   RadioGroup,
   Select,
@@ -20,13 +26,15 @@ import {
   useColorMode,
 } from '@chakra-ui/react'
 import type * as monaco from 'monaco-editor'
-import { EditorOptionsContext } from '../context'
+import { EditorOptionsContext, PrettierOptionsContext } from '../context'
 import { loadFont } from '../utils/fonts'
+import type { PrettierOptions } from '../utils/prettier'
 
 interface Props {
   isOpen: boolean
   onClose(): void
   onEditorOptionsChange(options: monaco.editor.IEditorOptions): void
+  onPrettierOptionsChange(options: PrettierOptions): void
 }
 
 const GlobalSettingsModal: React.FC<Props> = (props) => {
@@ -36,6 +44,10 @@ const GlobalSettingsModal: React.FC<Props> = (props) => {
   const originalEditorOptions = useContext(EditorOptionsContext)
   const [colorMode, setColorMode] = useState('light')
   const [editorOptions, setEditorOptions] = useState(originalEditorOptions)
+  const originalPrettierOptions = useContext(PrettierOptionsContext)
+  const [prettierOptions, setPrettierOptions] = useState(
+    originalPrettierOptions
+  )
   const initialFocusRef = useRef<HTMLButtonElement | null>(null)
   const {
     colorMode: originalColorMode,
@@ -44,6 +56,8 @@ const GlobalSettingsModal: React.FC<Props> = (props) => {
 
   const handleConfirm = async () => {
     applyColorMode(colorMode)
+
+    props.onPrettierOptionsChange(prettierOptions)
 
     try {
       setIsLoading(true)
@@ -64,6 +78,7 @@ const GlobalSettingsModal: React.FC<Props> = (props) => {
   const handleCancel = () => {
     setColorMode(originalColorMode)
     setEditorOptions(originalEditorOptions)
+    setPrettierOptions(originalPrettierOptions)
     setIsLoading(false)
     onClose()
   }
@@ -90,6 +105,43 @@ const GlobalSettingsModal: React.FC<Props> = (props) => {
     setEditorOptions((options) => ({
       ...options,
       lineHeight: Number.parseFloat(event.target.value) || undefined,
+    }))
+  }
+
+  const handleSemiChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPrettierOptions((options) => ({
+      ...options,
+      semi: event.target.checked,
+    }))
+  }
+
+  const handleSingleQuoteChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setPrettierOptions((options) => ({
+      ...options,
+      singleQuote: event.target.checked,
+    }))
+  }
+
+  const handleTabWidthChange = (_: string, value: number) => {
+    setPrettierOptions((options) => ({
+      ...options,
+      tabWidth: value,
+    }))
+  }
+
+  const handleTrailingCommaChange = (value: string) => {
+    setPrettierOptions((options) => ({
+      ...options,
+      trailingComma: value as PrettierOptions['trailingComma'],
+    }))
+  }
+
+  const handleUseTabsChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPrettierOptions((options) => ({
+      ...options,
+      useTabs: event.target.checked,
     }))
   }
 
@@ -150,6 +202,56 @@ const GlobalSettingsModal: React.FC<Props> = (props) => {
                 value={editorOptions.lineHeight}
                 onChange={handleLineHeightChange}
               />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Prettier</FormLabel>
+              <HStack spacing="24px">
+                <Checkbox
+                  isChecked={prettierOptions.semi}
+                  onChange={handleSemiChange}
+                >
+                  Semi
+                </Checkbox>
+                <Checkbox
+                  isChecked={prettierOptions.singleQuote}
+                  onChange={handleSingleQuoteChange}
+                >
+                  Single Quote
+                </Checkbox>
+                <Checkbox
+                  isChecked={prettierOptions.useTabs}
+                  onChange={handleUseTabsChange}
+                >
+                  Use Tabs
+                </Checkbox>
+              </HStack>
+            </FormControl>
+            <FormControl>
+              <FormLabel>Prettier - Tab Width</FormLabel>
+              <NumberInput
+                value={prettierOptions.tabWidth}
+                min={0}
+                onChange={handleTabWidthChange}
+              >
+                <NumberInputField />
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+            </FormControl>
+            <FormControl>
+              <FormLabel>Prettier - Trailing Comma</FormLabel>
+              <RadioGroup
+                value={prettierOptions.trailingComma}
+                onChange={handleTrailingCommaChange}
+              >
+                <HStack spacing="24px">
+                  <Radio value="none">None</Radio>
+                  <Radio value="es5">ES5</Radio>
+                  <Radio value="all">All</Radio>
+                </HStack>
+              </RadioGroup>
             </FormControl>
           </VStack>
         </ModalBody>

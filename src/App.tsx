@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { ChakraProvider, extendTheme, useDisclosure } from '@chakra-ui/react'
 import type * as monaco from 'monaco-editor'
-import { EditorOptionsContext } from './context'
+import { EditorOptionsContext, PrettierOptionsContext } from './context'
+import type { PrettierOptions } from './utils/prettier'
 import Header from './components/Header'
 import Workspace from './components/Workspace'
 import GlobalSettingsModal from './components/GlobalSettingsModal'
@@ -26,18 +27,28 @@ const App: React.FC = () => {
     fontSize: 16,
     lineHeight: 24,
   })
+  const [prettierOptions, setPrettierOptions] = useState<PrettierOptions>({
+    semi: false,
+    singleQuote: true,
+    tabWidth: 2,
+    trailingComma: 'es5',
+    useTabs: false,
+  })
   const globalSettingsModal = useDisclosure()
 
   return (
     <ChakraProvider theme={theme}>
       <EditorOptionsContext.Provider value={editorOptions}>
-        <Header onOpenGlobalSettings={globalSettingsModal.onOpen} />
-        <Workspace />
-        <GlobalSettingsModal
-          isOpen={globalSettingsModal.isOpen}
-          onClose={globalSettingsModal.onClose}
-          onEditorOptionsChange={setEditorOptions}
-        />
+        <PrettierOptionsContext.Provider value={prettierOptions}>
+          <Header onOpenGlobalSettings={globalSettingsModal.onOpen} />
+          <Workspace />
+          <GlobalSettingsModal
+            isOpen={globalSettingsModal.isOpen}
+            onClose={globalSettingsModal.onClose}
+            onEditorOptionsChange={setEditorOptions}
+            onPrettierOptionsChange={setPrettierOptions}
+          />
+        </PrettierOptionsContext.Provider>
       </EditorOptionsContext.Provider>
       <Footer />
     </ChakraProvider>

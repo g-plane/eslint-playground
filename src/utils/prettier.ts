@@ -1,17 +1,29 @@
 import prettier from 'prettier/esm/standalone'
+import type * as Prettier from 'prettier'
 import parserJavaScript from 'prettier/esm/parser-babel'
 import parserTypeScript from 'prettier/esm/parser-typescript'
 import parserHTML from 'prettier/esm/parser-html'
 import type * as monaco from 'monaco-editor'
 
-export function format(code: string, language: string): string {
+export type PrettierOptions = Pick<
+  Prettier.Options,
+  'semi' | 'singleQuote' | 'tabWidth' | 'trailingComma' | 'useTabs'
+>
+
+function format(
+  code: string,
+  options: PrettierOptions & Pick<Prettier.Options, 'parser'>
+): string {
   return prettier.format(code, {
-    parser: language === 'typescript' ? 'typescript' : 'babel',
+    ...options,
     plugins: [parserJavaScript, parserTypeScript, parserHTML],
   })
 }
 
-export function registerFormattingProvider(monacoInstance: typeof monaco) {
+export function registerFormattingProvider(
+  monacoInstance: typeof monaco,
+  options: PrettierOptions
+) {
   const disposeForJS = monacoInstance.languages.registerDocumentFormattingEditProvider(
     'javascript',
     {
@@ -20,7 +32,7 @@ export function registerFormattingProvider(monacoInstance: typeof monaco) {
         return [
           {
             range: model.getFullModelRange(),
-            text: format(model.getValue(), 'javascript'),
+            text: format(model.getValue(), { ...options, parser: 'babel' }),
           },
         ]
       },
@@ -35,7 +47,10 @@ export function registerFormattingProvider(monacoInstance: typeof monaco) {
         return [
           {
             range: model.getFullModelRange(),
-            text: format(model.getValue(), 'typescript'),
+            text: format(model.getValue(), {
+              ...options,
+              parser: 'typescript',
+            }),
           },
         ]
       },
