@@ -49,6 +49,14 @@ const RuleEditor: React.FC<Props> = (props) => {
     }
   }, [language])
 
+  useEffect(() => {
+    if (monacoInstance) {
+      const disposable = registerFormattingProvider(monacoInstance)
+
+      return disposable
+    }
+  }, [monacoInstance])
+
   useAsync(async () => {
     if (monacoInstance) {
       props.onInput(
@@ -66,9 +74,8 @@ const RuleEditor: React.FC<Props> = (props) => {
     monacoInstance: typeof monaco
   ) => {
     editorRef.current = editor
-
     editor.updateOptions(defaultEditorConfig)
-    registerFormattingProvider(monacoInstance)
+
     await Promise.all([loadESTree(monacoInstance), loadESLint(monacoInstance)])
   }
 

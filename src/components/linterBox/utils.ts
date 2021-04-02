@@ -54,7 +54,7 @@ export function convertLintMessagesToEditorMarkers(
 const regexRuleName = /^eslint\((.+)\)/
 
 export function registerCodeActionProvider(monacoInstance: typeof monaco) {
-  monacoInstance.languages.registerCodeActionProvider('javascript', {
+  return monacoInstance.languages.registerCodeActionProvider('javascript', {
     provideCodeActions: (model, _range, context) => ({
       actions: context.markers
         .filter((marker) => marker.source === 'ESLint')

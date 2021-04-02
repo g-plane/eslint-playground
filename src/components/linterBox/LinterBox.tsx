@@ -51,6 +51,22 @@ const LinterBox: React.FC<Props> = (props) => {
     }
   }, [messages])
 
+  useEffect(() => {
+    if (monacoInstance) {
+      const disposable = registerCodeActionProvider(monacoInstance)
+
+      return () => disposable.dispose()
+    }
+  }, [monacoInstance])
+
+  useEffect(() => {
+    if (monacoInstance) {
+      const disposable = registerFormattingProvider(monacoInstance)
+
+      return disposable
+    }
+  }, [monacoInstance])
+
   useDebounce(
     async () => {
       try {
@@ -78,14 +94,10 @@ const LinterBox: React.FC<Props> = (props) => {
   )
 
   const handleEditorDidMount = (
-    editor: monaco.editor.IStandaloneCodeEditor,
-    monacoInstance: typeof monaco
+    editor: monaco.editor.IStandaloneCodeEditor
   ) => {
     editorRef.current = editor
     editor.updateOptions(defaultEditorConfig)
-
-    registerCodeActionProvider(monacoInstance)
-    registerFormattingProvider(monacoInstance)
   }
 
   const handleEditorValueChange = (value: string | undefined) => {
