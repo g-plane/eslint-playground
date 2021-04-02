@@ -12,6 +12,7 @@ import { VscSettingsGear } from 'react-icons/vsc'
 import MonacoEditor, { useMonaco } from '@monaco-editor/react'
 import type * as monaco from 'monaco-editor'
 import { defaultMonacoOptions, defaultEditorConfig } from '../../utils'
+import { registerFormattingProvider } from '../../utils/prettier'
 import { loadESTree, loadESLint } from '../../extraLibs'
 import { useEditorOptions } from '../../hooks'
 import { getRunnableCode } from './utils'
@@ -67,7 +68,7 @@ const RuleEditor: React.FC<Props> = (props) => {
     editorRef.current = editor
 
     editor.updateOptions(defaultEditorConfig)
-
+    registerFormattingProvider(monacoInstance)
     await Promise.all([loadESTree(monacoInstance), loadESLint(monacoInstance)])
   }
 

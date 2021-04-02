@@ -7,6 +7,7 @@ import MonacoEditor, { useMonaco } from '@monaco-editor/react'
 import type * as monaco from 'monaco-editor'
 import { useEditorOptions } from '../../hooks'
 import { defaultMonacoOptions, defaultEditorConfig } from '../../utils'
+import { registerFormattingProvider } from '../../utils/prettier'
 import {
   executeCode,
   lint,
@@ -84,6 +85,7 @@ const LinterBox: React.FC<Props> = (props) => {
     editor.updateOptions(defaultEditorConfig)
 
     registerCodeActionProvider(monacoInstance)
+    registerFormattingProvider(monacoInstance)
   }
 
   const handleEditorValueChange = (value: string | undefined) => {

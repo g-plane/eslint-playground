@@ -5,6 +5,12 @@ declare module 'eslint4b' {
   export default Linter
 }
 
+declare module 'prettier/esm/standalone' {
+  export * from 'prettier'
+}
+
+declare module 'prettier/esm/parser-*'
+
 declare module 'process/browser' {
   let process: NodeJS.Process
   export default process
