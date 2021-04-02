@@ -50,7 +50,10 @@ const GlobalSettingsModal: React.FC<Props> = (props) => {
       await loadFont(editorOptions.fontFamily!)
       props.onEditorOptionsChange(editorOptions)
     } catch {
-      setEditorOptions(originalEditorOptions)
+      setEditorOptions({
+        ...editorOptions,
+        fontFamily: originalEditorOptions.fontFamily,
+      })
     } finally {
       setIsLoading(false)
     }
